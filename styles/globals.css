@@ -1,10 +1,5 @@
-:root {
-  --color-white: #fff;
-}
-
 * {
   box-sizing: border-box;
-  color: var(--color-white);
   margin: 0;
   padding: 0;
 }
