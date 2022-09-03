@@ -1,7 +1,6 @@
 import React from 'react';
 import { Web3ReactProvider } from '@web3-react/core';
 import Web3 from 'web3';
-import Web3Modal from 'web3modal';
 
 interface Props {
   children: React.ReactNode;
@@ -9,7 +8,7 @@ interface Props {
 
 const Web3Provider: React.FC<Props> = ({ children }) => {
   const getLibrary = (provider: any) => {
-    return provider;
+    return new Web3(provider);
   };
 
   return (
