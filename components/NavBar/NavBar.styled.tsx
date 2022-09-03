@@ -7,13 +7,11 @@ export const NavContainer = styled.div`
   width: 100%;
   height: 150px;
   padding: 0 4.5em;
-  margin-bottom: 3.125em;
+  margin-bottom: 1em;
   gap: 1.5em;
 
   @media (max-width: 500px) {
     padding: 0;
-    margin-left: -1.5em;
-    margin-bottom: 2em;
     justify-content: center;
   }
 `;

@@ -6,6 +6,7 @@ declare module 'styled-components' {
     colors: {
       bgMain: string;
       textMain: string;
+      textOffset: string;
       hover: string;
     };
   }

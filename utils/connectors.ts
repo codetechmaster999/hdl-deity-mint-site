@@ -1,5 +1,29 @@
 import { InjectedConnector } from '@web3-react/injected-connector';
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 
-export const injected = new InjectedConnector({
+export enum Connectors {
+  Injected,
+  WalletConnect,
+}
+
+const RPC_URLS = {
+  1: process.env.NEXT_PUBLIC_RPC_URL_1 as string,
+  4: process.env.NEXT_PUBLIC_RPC_URL_4 as string,
+  5: process.env.NEXT_PUBLIC_RPC_URL_5 as string,
+};
+
+const injected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5],
 });
+
+const walletconnect = new WalletConnectConnector({
+  rpc: RPC_URLS,
+  chainId: 1,
+  bridge: 'https://bridge.walletconnect.org',
+  qrcode: true,
+});
+
+export const connectors = {
+  [Connectors.Injected]: injected,
+  [Connectors.WalletConnect]: walletconnect,
+};

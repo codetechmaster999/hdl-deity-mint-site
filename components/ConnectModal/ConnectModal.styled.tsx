@@ -1,35 +1,35 @@
 import styled from 'styled-components';
 
-export const HeroContainer = styled.div`
+export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 3em;
+  gap: 1.5em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: ${(props) => props.theme.colors.bgMain};
+  border: 3px solid ${(props) => props.theme.colors.textMain};
+  padding: 1.75em 1.5em;
+  z-index: 69;
+  min-width: 300px;
 `;
 
-export const ButtonContainer = styled.div`
+export const MsgDiv = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-evenly;
   gap: 1em;
-  width: 35%;
-  min-width: 360px;
 `;
 
-export const Title = styled.h1`
+export const Text = styled.span`
+  color: ${(props) => props.theme.colors.textMain};
+  font-size: 1.25rem;
   font-weight: 500;
-  letter-spacing: 1.25px;
-
-  @media (max-width: 500px) {
-    font-size: 1.5rem;
-  }
-`;
-
-export const SubTitle = styled.h3``;
-
-export const SubtleText = styled.span`
-  color: ${(props) => props.theme.colors.textOffset};
+  max-width: 30ch;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 30ch;
 `;
 
 export const Button = styled.button`
@@ -42,7 +42,7 @@ export const Button = styled.button`
   border-radius: ${(props) => props.theme.borderRadius};
   background-color: ${(props) => props.theme.colors.bgMain};
   color: ${(props) => props.theme.colors.textMain};
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 500;
   cursor: pointer;
 
@@ -54,4 +54,9 @@ export const Button = styled.button`
   @media (max-width: 500px) {
     min-width: 150px;
   }
+`;
+
+export const XButton = styled.img`
+  width: 1.25em;
+  cursor: pointer;
 `;
