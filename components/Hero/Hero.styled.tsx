@@ -14,7 +14,6 @@ export const ButtonContainer = styled.div`
   justify-content: space-evenly;
   gap: 1em;
   width: 35%;
-  min-width: 360px;
 `;
 
 export const Title = styled.h1`
@@ -44,6 +43,7 @@ export const Button = styled.button`
   color: ${(props) => props.theme.colors.textMain};
   font-size: 1rem;
   font-weight: 500;
+  padding: 0 0.5em;
   cursor: pointer;
 
   :hover {
