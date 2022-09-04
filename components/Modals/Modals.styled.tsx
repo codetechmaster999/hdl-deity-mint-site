@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.5em;
   position: fixed;
   top: 50%;
@@ -59,4 +60,17 @@ export const Button = styled.button`
 export const XButton = styled.img`
   width: 1.25em;
   cursor: pointer;
+`;
+
+export const LittleButtonDiv = styled.div`
+  display: flex;
+  gap: 2em;
+`;
+
+export const LittleButton = styled(Button)`
+  min-width: 120px;
+`;
+
+export const SubtleText = styled.span`
+  color: ${(props) => props.theme.colors.textOffset};
 `;

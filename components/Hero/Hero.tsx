@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { useEagerConnect } from 'hooks/useEagerConnect';
-import ConnectModal from 'components/ConnectModal/ConnectModal';
+import ConnectModal from 'components/Modals/ConnectModal';
+import DisconnectModal from 'components/Modals/DisconnectModal';
 import * as St from './Hero.styled';
 
 const Hero: React.FC = () => {
@@ -10,10 +11,15 @@ const Hero: React.FC = () => {
 
   const [isConnecting, setIsConnecting] = useState(false);
   const [showConnectModal, setShowConnectModal] = useState(false);
+  const [showDisconnectModal, setShowDisconnectModal] = useState(false);
   const [connectButtonText, setConnectButtonText] = useState('CONNECT WALLET');
 
   const handleConnectClick = async () => {
-    setShowConnectModal(!showConnectModal);
+    if (active) {
+      setShowDisconnectModal(true);
+    } else {
+      setShowConnectModal(!showConnectModal);
+    }
   };
 
   const handleMintClick = async () => {
@@ -29,6 +35,8 @@ const Hero: React.FC = () => {
       setTimeout(() => {
         setShowConnectModal(false);
       }, 1500);
+    } else {
+      setConnectButtonText('CONNECT WALLET');
     }
   }, [active, isConnecting]);
 
@@ -49,6 +57,10 @@ const Hero: React.FC = () => {
           setShowModal={setShowConnectModal}
           setIsConnecting={setIsConnecting}
         />
+      )}
+
+      {showDisconnectModal && (
+        <DisconnectModal setShowModal={setShowDisconnectModal} />
       )}
     </St.HeroContainer>
   );

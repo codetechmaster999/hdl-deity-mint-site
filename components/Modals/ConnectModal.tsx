@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { Connectors, connectors } from 'utils/connectors';
-import * as St from './ConnectModal.styled';
+import * as St from './Modals.styled';
 
 interface Props {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
