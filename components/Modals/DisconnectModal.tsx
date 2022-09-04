@@ -19,7 +19,7 @@ const ConnectModal: React.FC<Props> = ({ setShowModal }) => {
   };
 
   return (
-    <St.ModalContainer>
+    <St.DisconnectModalContainer>
       <St.MsgDiv>
         <St.Text>WOULD YOU LIKE TO DISCONNECT?</St.Text>
         <St.XButton src="/icons/x-icon-lg.svg" onClick={handleCloseModal} />
@@ -31,7 +31,7 @@ const ConnectModal: React.FC<Props> = ({ setShowModal }) => {
       </St.LittleButtonDiv>
 
       <St.SubtleText>[ WILL RECONNECT ON REFRESH ]</St.SubtleText>
-    </St.ModalContainer>
+    </St.DisconnectModalContainer>
   );
 };
 

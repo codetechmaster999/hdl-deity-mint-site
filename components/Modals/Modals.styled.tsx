@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1.5em;
   position: fixed;
   top: 50%;
@@ -14,6 +13,10 @@ export const ModalContainer = styled.div`
   padding: 1.75em 1.5em;
   z-index: 69;
   min-width: 300px;
+`;
+
+export const DisconnectModalContainer = styled(ModalContainer)`
+  align-items: center;
 `;
 
 export const MsgDiv = styled.div`
