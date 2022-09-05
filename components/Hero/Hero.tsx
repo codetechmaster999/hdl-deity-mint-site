@@ -27,11 +27,12 @@ const Hero: React.FC = () => {
       <St.SubtleDiv>
         <St.SubtleText>FREE MINT. LIMIT ONE PER WALLET.</St.SubtleText>
 
-        <St.CountdownStyled date={mintStart} />
-
-        <St.SubtleText>
-          {isMintLive ? 'REMAINING' : 'UNTIL LAUNCH'}
-        </St.SubtleText>
+        <St.CountdownDiv>
+          <St.CountdownStyled date={mintStart} />
+          <St.SubtleText>
+            {isMintLive ? 'REMAINING' : 'UNTIL LAUNCH'}
+          </St.SubtleText>
+        </St.CountdownDiv>
       </St.SubtleDiv>
     </St.HeroContainer>
   );

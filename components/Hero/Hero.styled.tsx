@@ -32,10 +32,19 @@ export const SubtleDiv = styled.div`
   display: flex;
   align-items: center;
   gap: 0.375em;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 export const SubtleText = styled.span`
   color: ${(props) => props.theme.colors.textOffset};
+`;
+
+export const CountdownDiv = styled.div`
+  display: flex;
+  gap: 0.375em;
 `;
 
 export const CountdownStyled = styled(Countdown)`
