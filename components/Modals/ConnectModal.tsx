@@ -14,10 +14,11 @@ const ConnectModal: React.FC<Props> = ({ setShowModal, setIsConnecting }) => {
   const [txMsg, setTxMsg] = useState('');
 
   const handleConnectWallet = async (connectorToUse: Connectors) => {
+    setShowModal(false);
+    setIsConnecting(true);
     const connector = connectors[connectorToUse];
 
     try {
-      setIsConnecting(true);
       await activate(connector);
       if (active) setTxMsg('SUCCESSFULLY CONNECTED');
     } catch (err) {
@@ -49,6 +50,9 @@ const ConnectModal: React.FC<Props> = ({ setShowModal, setIsConnecting }) => {
       </St.Button>
       <St.Button onClick={() => handleConnectWallet(Connectors.WalletConnect)}>
         WALLETCONNECT
+      </St.Button>
+      <St.Button onClick={() => handleConnectWallet(Connectors.Coinbase)}>
+        COINBASE
       </St.Button>
     </St.ModalContainer>
   );

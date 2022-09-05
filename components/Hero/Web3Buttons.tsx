@@ -27,7 +27,14 @@ const Web3Buttons: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isConnecting) setConnectButtonText('CONNECTING...');
+    if (isConnecting && !active) {
+      setConnectButtonText('CONNECTING...');
+
+      setTimeout(() => {
+        setIsConnecting(false);
+        setConnectButtonText('CONNECT WALLET');
+      }, 15000);
+    }
 
     if (active) {
       setConnectButtonText('CONNECTED');
@@ -35,9 +42,9 @@ const Web3Buttons: React.FC = () => {
       setTimeout(() => {
         setShowConnectModal(false);
       }, 1500);
-    } else {
-      setConnectButtonText('CONNECT WALLET');
     }
+
+    if (!active && !isConnecting) setConnectButtonText('CONNECT WALLET');
   }, [active, isConnecting]);
 
   return (

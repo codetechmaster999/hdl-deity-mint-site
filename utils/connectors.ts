@@ -1,9 +1,11 @@
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 
 export enum Connectors {
   Injected,
   WalletConnect,
+  Coinbase,
 }
 
 const RPC_URLS = {
@@ -23,7 +25,14 @@ const walletconnect = new WalletConnectConnector({
   qrcode: true,
 });
 
+const coinbase = new WalletLinkConnector({
+  url: RPC_URLS[1],
+  appName: 'HDL Mint',
+  supportedChainIds: [1, 3, 4, 5],
+});
+
 export const connectors = {
   [Connectors.Injected]: injected,
   [Connectors.WalletConnect]: walletconnect,
+  [Connectors.Coinbase]: coinbase,
 };
