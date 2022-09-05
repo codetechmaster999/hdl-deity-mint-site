@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Countdown from 'react-countdown';
 
 export const HeroContainer = styled.div`
   display: flex;
@@ -27,8 +28,19 @@ export const Title = styled.h1`
 
 export const SubTitle = styled.h3``;
 
+export const SubtleDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.375em;
+`;
+
 export const SubtleText = styled.span`
   color: ${(props) => props.theme.colors.textOffset};
+`;
+
+export const CountdownStyled = styled(Countdown)`
+  color: ${(props) => props.theme.colors.textOffset};
+  margin-left: 1em;
 `;
 
 export const Button = styled.button`
