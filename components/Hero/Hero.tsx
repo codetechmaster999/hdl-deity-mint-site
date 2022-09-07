@@ -6,9 +6,6 @@ import { useMintDate } from 'hooks/useIsMintLive';
 const Hero: React.FC = () => {
   const { isMintLive, mintStart } = useMintDate();
 
-  const nodeEnv = 'production';
-  // const nodeEnv = process.env.NODE_ENV;
-
   return (
     <St.HeroContainer>
       <St.Title>HDL CORPORATE LOGO COLLECTION</St.Title>
