@@ -1,47 +1,32 @@
 export const sliderMedia = [
   {
     id: 1,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
+    name: 'Gold Glitch',
+    video_url: '/videos/gold_glitch.gif',
   },
   {
     id: 2,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
+    name: 'Gold Winkle',
+    video_url: '/videos/gold_winkle.gif',
   },
   {
     id: 3,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
+    name: 'Chrome Black',
+    video_url: '/videos/chrome_black.gif',
   },
   {
     id: 4,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
+    name: 'Gold Peach',
+    video_url: '/videos/gold_peach.gif',
   },
   {
     id: 5,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
+    name: 'Chrome Pink',
+    video_url: '/videos/chrome_pink.gif',
   },
   {
     id: 6,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
-  },
-  {
-    id: 7,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
-  },
-  {
-    id: 8,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
-  },
-  {
-    id: 9,
-    name: 'Brass Ram',
-    video_url: '/videos/brass_ram.mp4',
+    name: 'Gold Cyan',
+    video_url: '/videos/gold_cyan.gif',
   },
 ];

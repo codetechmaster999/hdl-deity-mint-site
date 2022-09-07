@@ -19,33 +19,44 @@ export const SliderWrapper = styled.div<SliderWrapperProps>`
   overflow: hidden;
   position: relative;
   margin-top: 2rem;
-  height: 650px;
+  width: 100%;
+  height: 550px;
   padding: ${(props) => (props.zoomFactor / props.visibleSlides) * 0.7 + '%'} 0;
+  margin-bottom: -5em;
+
+  @media (max-width: 500px) {
+    margin-bottom: -6em;
+  }
 
   .button-wrapper {
     position: absolute;
     width: 48px;
-    height: 100%;
-    top: 12.5%;
+    height: 225px;
+    top: 0;
     padding: ${(props) => props.zoomFactor / 7 + '%'} 0;
     box-sizing: border-box;
   }
 
   .button {
     display: block;
-    background: rgb(0, 0, 0, 0.7);
+    background: none;
     border: 0;
     top: 0;
     width: 48px;
-    height: 350px;
+    height: 100%;
     color: #fff;
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 800;
     cursor: pointer;
     outline: none;
     transition: all 0.7s;
     user-select: none;
-
+    @media (max-width: 600px) {
+      margin-top: 20px;
+    }
+    @media (max-width: 450px) {
+      margin-top: 8px;
+    }
     :hover {
       opacity: 0.5;
     }
@@ -53,12 +64,12 @@ export const SliderWrapper = styled.div<SliderWrapperProps>`
 
   .back {
     left: 0;
-    border-radius: 0 3vw 3vw 0;
+    border-radius: 0 8px 8px 0;
   }
 
   .forward {
     right: 0;
-    border-radius: 3vw 0 0 3vw;
+    border-radius: 8px 0 0 8px;
   }
 `;
 
