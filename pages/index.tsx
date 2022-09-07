@@ -6,6 +6,7 @@ import NavBar from 'components/NavBar/NavBar';
 import DynamicHero from 'components/Hero/DynamicHero';
 import Slider from 'components/Slider/Slider';
 import { sliderMedia } from 'components/Slider/sliderMedia';
+import { useMintDate } from 'hooks/useIsMintLive';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -28,6 +29,12 @@ const AppContainer = styled.div`
 `;
 
 const Home: NextPage = () => {
+  const { isMintLive, mintStart } = useMintDate();
+
+  // toggle these vars to work on the fallback page
+  const nodeEnv = 'production';
+  // const nodeEnv = process.env.NODE_ENV;
+
   return (
     <AppContainer>
       <Head>
@@ -36,22 +43,27 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
-      <NavBar />
-      <DynamicHero />
-
-      <Slider>
-        {sliderMedia.map((nft) => (
-          <div key={nft.id}>
-            <img src={nft.video_url} alt="slide" />
-          </div>
-        ))}
-      </Slider>
-      <p>
-        HDL will mint its iconic corporate pigeon logo for free for the public
-        to own, the minting will be a 72 hour window. The logo NFT’s will come
-        in several varieties with varying degrees of rarity. Future utility will
-        be announced.
-      </p>
+      {isMintLive || nodeEnv !== 'production' ? (
+        <>
+          <NavBar />
+          <DynamicHero />
+          <Slider>
+            {sliderMedia.map((nft) => (
+              <div key={nft.id}>
+                <img src={nft.video_url} alt="slide" />
+              </div>
+            ))}
+          </Slider>
+          <p>
+            HDL will mint its iconic corporate pigeon logo for free for the
+            public to own, the minting will be a 72 hour window. The logo NFT’s
+            will come in several varieties with varying degrees of rarity.
+            Future utility will be announced.
+          </p>
+        </>
+      ) : (
+        <h1>Fallback Landing Page</h1>
+      )}
     </AppContainer>
   );
 };

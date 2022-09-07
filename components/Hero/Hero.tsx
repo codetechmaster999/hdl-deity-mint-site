@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Web3Buttons from './Web3Buttons';
 import * as St from './Hero.styled';
+import { useMintDate } from 'hooks/useIsMintLive';
 
 const Hero: React.FC = () => {
-  const currentTime = new Date().getTime();
-  const mintStart = Date.parse('2022-09-08T12:00:00-0500');
-  const mintEnd = Date.parse('2022-09-11T12:00:00-0500');
+  const { isMintLive, mintStart } = useMintDate();
 
-  const [isMintLive, setIsMintLive] = useState(false);
-  const [countdownDate, setCountdownDate] = useState(mintStart);
-
-  useEffect(() => {
-    if (currentTime >= mintStart && currentTime <= mintEnd) {
-      setIsMintLive(true);
-      setCountdownDate(mintEnd);
-    }
-  }, [currentTime]);
+  const nodeEnv = 'production';
+  // const nodeEnv = process.env.NODE_ENV;
 
   return (
     <St.HeroContainer>
