@@ -15,7 +15,7 @@ export const ModalContainer = styled.div`
   min-width: 300px;
 `;
 
-export const DisconnectModalContainer = styled(ModalContainer)`
+export const CenterModalContainer = styled(ModalContainer)`
   align-items: center;
 `;
 

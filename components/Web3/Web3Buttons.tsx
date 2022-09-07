@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { useEagerConnect } from 'hooks/useEagerConnect';
+import { useContract } from 'hooks/useContract';
+import { mintToken } from './web3Helpers';
 import ConnectModal from 'components/Modals/ConnectModal';
 import DisconnectModal from 'components/Modals/DisconnectModal';
-import * as St from './Hero.styled';
+import ErrorModal from 'components/Modals/ErrorModal';
+import * as St from '../Hero/Hero.styled';
 
 const Web3Buttons: React.FC = () => {
   useEagerConnect();
-  const { active } = useWeb3React();
+  const { active, account } = useWeb3React();
+  const contract = useContract();
 
-  const [isConnecting, setIsConnecting] = useState(false);
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [isConnecting, setIsConnecting] = useState(false);
   const [connectButtonText, setConnectButtonText] = useState('CONNECT WALLET');
+  const [mintButtonText, setMintButtonText] = useState('MINT');
 
   const handleConnectClick = async () => {
     if (active) {
@@ -22,8 +31,21 @@ const Web3Buttons: React.FC = () => {
     }
   };
 
+  const handleError = (error: string) => {
+    setErrorMessage(error);
+    setShowErrorModal(true);
+  };
+
   const handleMintClick = async () => {
-    console.log('minting token');
+    if (!active) setShowConnectModal(true);
+    else {
+      try {
+        mintToken(contract, account as string, handleError, setMintButtonText);
+      } catch (err) {
+        console.error(err);
+        handleError('Error minting token');
+      }
+    }
   };
 
   useEffect(() => {
@@ -50,7 +72,7 @@ const Web3Buttons: React.FC = () => {
   return (
     <St.ButtonContainer>
       <St.Button onClick={handleConnectClick}>{connectButtonText}</St.Button>
-      <St.Button onClick={handleMintClick}>MINT</St.Button>
+      <St.Button onClick={handleMintClick}>{mintButtonText}</St.Button>
 
       {showConnectModal && (
         <ConnectModal
@@ -61,6 +83,10 @@ const Web3Buttons: React.FC = () => {
 
       {showDisconnectModal && (
         <DisconnectModal setShowModal={setShowDisconnectModal} />
+      )}
+
+      {showErrorModal && (
+        <ErrorModal setShowModal={setShowErrorModal} message={errorMessage} />
       )}
     </St.ButtonContainer>
   );
