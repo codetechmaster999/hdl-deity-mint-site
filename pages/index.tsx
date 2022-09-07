@@ -16,6 +16,15 @@ const AppContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
+
+  p {
+    color: ${(props) => props.theme.colors.textOffset};
+    padding: 50px;
+    text-align: center;
+    @media (max-width: 500px) {
+      padding: 25px;
+    }
+  }
 `;
 
 const Home: NextPage = () => {
@@ -33,12 +42,16 @@ const Home: NextPage = () => {
       <Slider>
         {sliderMedia.map((nft) => (
           <div key={nft.id}>
-            <video loop autoPlay muted>
-              <source src={nft.video_url} type="video/mp4" />
-            </video>
+            <img src={nft.video_url} alt="slide" />
           </div>
         ))}
       </Slider>
+      <p>
+        HDL will mint its iconic corporate pigeon logo for free for the public
+        to own, the minting will be a 72 hour window. The logo NFT’s will come
+        in several varieties with varying degrees of rarity. Future utility will
+        be announced.
+      </p>
     </AppContainer>
   );
 };

@@ -7,6 +7,7 @@ export const HeroContainer = styled.div`
   align-items: center;
   width: 100%;
   gap: 3em;
+  margin-bottom: 1em;
 `;
 
 export const ButtonContainer = styled.div`
@@ -23,6 +24,7 @@ export const Title = styled.h1`
 
   @media (max-width: 500px) {
     font-size: 1.5rem;
+    text-align: center;
   }
 `;
 
@@ -31,7 +33,8 @@ export const SubTitle = styled.h3``;
 export const SubtleDiv = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.375em;
+  justify-content: space-between;
+  gap: 1.5em;
 
   @media (max-width: 500px) {
     flex-direction: column;
@@ -44,12 +47,11 @@ export const SubtleText = styled.span`
 
 export const CountdownDiv = styled.div`
   display: flex;
-  gap: 0.375em;
 `;
 
 export const CountdownStyled = styled(Countdown)`
-  color: ${(props) => props.theme.colors.textOffset};
-  margin-left: 1em;
+  color: ${(props) => props.theme.colors.textMain};
+  margin-right: 0.5em;
 `;
 
 export const Button = styled.button`

@@ -11,7 +11,7 @@ export const SliderItemDiv = styled.div<Props>`
   margin: 0 ${(props) => props.slideMargin}px;
   transition: transform 500ms ease;
   width: 100%;
-  height: 100;
+  height: 100%;
   box-sizing: border-box;
   display: flex;
   transform: scale(1);
@@ -25,7 +25,7 @@ export const SliderItemDiv = styled.div<Props>`
         ${(props) => props.slideMargin * 2}px
     );
 
-  video {
+  img {
     height: 100%;
     width: 100%;
     box-sizing: border-box;
@@ -56,24 +56,38 @@ export const SliderItemDiv = styled.div<Props>`
   }
 `;
 
-export const Reflection = styled.div`
+export const Reflection = styled.div<Props>`
   position: absolute;
   bottom: -61.5%;
   transform: scaleY(-1);
   opacity: 0.6;
-  height: 200px;
-  overflow: hidden;
+  height: 100%;
   filter: blur(1px);
 
-  video {
-    margin-top: -125px;
+  img {
+    margin-top: -25%;
+  }
+
+  &:after {
+    content: '';
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), black);
+    height: 250px;
+    width: 100%;
+    margin-top: -250px;
+    position: absolute;
+    z-index: 2;
   }
 `;
 
 export const Overlay = styled.div`
   position: absolute;
-  height: 201px;
-  width: 101%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), black);
+  height: 200px;
+  width: 100%;
+  top: -50%;
+  // background: linear-gradient(to top, rgba(0, 0, 0, 0.2), black);
   z-index: 2;
+
+  @media (max-width: 725px) {
+    top: -75%;
+  }
 `;

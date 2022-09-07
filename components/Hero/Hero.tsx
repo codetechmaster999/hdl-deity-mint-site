@@ -19,13 +19,14 @@ const Hero: React.FC = () => {
 
   return (
     <St.HeroContainer>
-      <St.Title>PRE-GENESIS COLLECTION</St.Title>
-      <St.SubTitle>[ THE DEITY ]</St.SubTitle>
+      <St.Title>HDL CORPORATE LOGO COLLECTION</St.Title>
+      <St.SubTitle>[ HDL LOGO ]</St.SubTitle>
 
       <Web3Buttons />
 
       <St.SubtleDiv>
-        <St.SubtleText>FREE MINT. LIMIT ONE PER WALLET.</St.SubtleText>
+        <St.SubtleText>FREE MINT.</St.SubtleText>
+        <St.SubtleText>LIMIT ONE PER WALLET.</St.SubtleText>
 
         <St.CountdownDiv>
           <St.CountdownStyled date={mintStart} />

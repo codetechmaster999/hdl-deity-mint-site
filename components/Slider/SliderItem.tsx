@@ -32,10 +32,7 @@ const SliderItem: React.FC<Props> = ({
       onMouseOut={callbackOut}
     >
       {children}
-      <St.Reflection>
-        <St.Overlay></St.Overlay>
-        {children}
-      </St.Reflection>
+      <St.Reflection>{children}</St.Reflection>
     </St.SliderItemDiv>
   </>
 );
