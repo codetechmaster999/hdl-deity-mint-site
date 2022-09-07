@@ -4,8 +4,8 @@ export const checkIfMintActive = async (contract: Contract) => {
   return (await contract.methods.isMintActive().call()) as boolean;
 };
 
-export const checkIfSupply = async (contract: Contract) => {
-  return (await contract.methods.checkSupply().call()) as boolean;
+export const fetchCurrentSupply = async (contract: Contract) => {
+  return (await contract.methods.getCurrentSupply().call()) as number;
 };
 
 export const checkIfUserHasMinted = async (
