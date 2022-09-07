@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 import Head from 'next/head';
 import NavBar from 'components/NavBar/NavBar';
-// import Hero from 'components/Hero/Hero';
 import DynamicHero from 'components/Hero/DynamicHero';
 import Slider from 'components/Slider/Slider';
 import { sliderMedia } from 'components/Slider/sliderMedia';

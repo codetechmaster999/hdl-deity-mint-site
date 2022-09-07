@@ -56,7 +56,7 @@ export const SliderItemDiv = styled.div<Props>`
   }
 `;
 
-export const Reflection = styled.div<Props>`
+export const Reflection = styled.div`
   position: absolute;
   bottom: -61.5%;
   transform: scaleY(-1);
