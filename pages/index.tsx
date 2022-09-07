@@ -18,14 +18,16 @@ const AppContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  cursor: default;
 
   p {
     color: ${(props) => props.theme.colors.textOffset};
-    padding: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 0;
     text-align: center;
-    @media (max-width: 500px) {
-      padding: 25px;
-    }
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -33,8 +35,8 @@ const Home: NextPage = () => {
   const { isMintLive, mintStart } = useMintDate();
 
   // toggle these vars to work on the fallback page
-  const nodeEnv = 'production';
-  // const nodeEnv = process.env.NODE_ENV;
+  // const nodeEnv = 'production';
+  const nodeEnv = process.env.NODE_ENV;
 
   return (
     <AppContainer>

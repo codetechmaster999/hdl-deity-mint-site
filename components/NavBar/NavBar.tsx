@@ -8,29 +8,33 @@ import * as St from './NavBar.styled';
 const NavBar: React.FC = () => {
   return (
     <St.NavContainer>
-      <St.NavLink
-        href="https://www.hdlcorp.io/"
-        className="menu-title"
-        target="blank"
-      >
-        HDL
-      </St.NavLink>
-      <St.NavLink
-        href="https://www.hdlcorp.io/about"
-        className="menu-title"
-        target="blank"
-      >
-        ABOUT
-      </St.NavLink>
-      <St.NavLink
-        href="https://www.hdlcorp.io/how-it-works"
-        className="menu-title"
-        id="how-it-works"
-        target="blank"
-      >
-        HOW IT WORKS
-      </St.NavLink>
-      <St.SocialContainer>
+      <St.NavLinksDiv>
+        <St.NavLink
+          href="https://www.hdlcorp.io/"
+          id="hdl"
+          className="menu-title"
+          target="blank"
+        >
+          HDL
+        </St.NavLink>
+        <St.NavLink
+          href="https://www.hdlcorp.io/about"
+          className="menu-title"
+          target="blank"
+        >
+          ABOUT
+        </St.NavLink>
+        <St.NavLink
+          href="https://www.hdlcorp.io/how-it-works"
+          className="menu-title"
+          id="how-it-works"
+          target="blank"
+        >
+          HOW IT WORKS
+        </St.NavLink>
+      </St.NavLinksDiv>
+      <St.Gap />
+      <St.NavLinksDiv>
         <St.NavLink
           href="https://twitter.com/hdlcorp"
           className="menu-title"
@@ -55,7 +59,7 @@ const NavBar: React.FC = () => {
         >
           <Instagram height={20} width={20} />
         </St.NavLink>
-      </St.SocialContainer>
+      </St.NavLinksDiv>
     </St.NavContainer>
   );
 };

@@ -20,18 +20,18 @@ export const SliderWrapper = styled.div<SliderWrapperProps>`
   position: relative;
   margin-top: 2rem;
   width: 100%;
-  height: 650px;
+  height: 550px;
   padding: ${(props) => (props.zoomFactor / props.visibleSlides) * 0.7 + '%'} 0;
   margin-bottom: -5em;
 
   @media (max-width: 500px) {
-    margin-bottom: -7em;
+    margin-bottom: -6em;
   }
 
   .button-wrapper {
     position: absolute;
     width: 48px;
-    height: 260px;
+    height: 225px;
     top: 0;
     padding: ${(props) => props.zoomFactor / 7 + '%'} 0;
     box-sizing: border-box;
@@ -51,8 +51,12 @@ export const SliderWrapper = styled.div<SliderWrapperProps>`
     outline: none;
     transition: all 0.7s;
     user-select: none;
-    z-index: 10;
-
+    @media (max-width: 600px) {
+      margin-top: 20px;
+    }
+    @media (max-width: 450px) {
+      margin-top: 8px;
+    }
     :hover {
       opacity: 0.5;
     }
