@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
-import { Connectors, connectors } from 'utils/connectors';
+import { Connectors, connectors } from 'web3/connectors';
 import * as St from './Modals.styled';
 
 interface Props {

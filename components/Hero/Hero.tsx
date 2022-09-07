@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Web3Buttons from './Web3Buttons';
+import Web3Buttons from '../Web3/Web3Buttons';
 import * as St from './Hero.styled';
 import { useMintDate } from 'hooks/useIsMintLive';
 

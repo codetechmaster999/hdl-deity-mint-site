@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { useEagerConnect } from 'hooks/useEagerConnect';
+import { useContract } from 'hooks/useContract';
 import ConnectModal from 'components/Modals/ConnectModal';
 import DisconnectModal from 'components/Modals/DisconnectModal';
-import * as St from './Hero.styled';
+import * as St from '../Hero/Hero.styled';
+import { mintToken } from './web3Helpers';
 
 const Web3Buttons: React.FC = () => {
   useEagerConnect();
-  const { active } = useWeb3React();
+  const { active, account } = useWeb3React();
+  const contract = useContract();
 
   const [isConnecting, setIsConnecting] = useState(false);
   const [showConnectModal, setShowConnectModal] = useState(false);
@@ -23,7 +26,8 @@ const Web3Buttons: React.FC = () => {
   };
 
   const handleMintClick = async () => {
-    console.log('minting token');
+    if (!active) setShowConnectModal(true);
+    else mintToken(contract, account as string);
   };
 
   useEffect(() => {

@@ -32,8 +32,8 @@ const Home: NextPage = () => {
   const { isMintLive, mintStart } = useMintDate();
 
   // toggle these vars to work on the fallback page
-  const nodeEnv = 'production';
-  // const nodeEnv = process.env.NODE_ENV;
+  // const nodeEnv = 'production';
+  const nodeEnv = process.env.NODE_ENV;
 
   return (
     <AppContainer>

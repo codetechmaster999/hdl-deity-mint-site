@@ -21,7 +21,9 @@
     "react-dom": "18.2.0",
     "react-is": "^18.2.0",
     "styled-components": "^5.3.5",
-    "web3": "^1.7.5"
+    "web3": "^1.7.5",
+    "web3-eth-contract": "^1.7.5",
+    "web3-utils": "^1.7.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
