@@ -15,7 +15,7 @@ const RPC_URLS = {
 };
 
 const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5],
+  supportedChainIds: [1],
 });
 
 const walletconnect = new WalletConnectConnector({
@@ -28,7 +28,7 @@ const walletconnect = new WalletConnectConnector({
 const coinbase = new WalletLinkConnector({
   url: RPC_URLS[1],
   appName: 'HDL Mint',
-  supportedChainIds: [1, 3, 4, 5],
+  supportedChainIds: [1],
 });
 
 export const connectors = {
