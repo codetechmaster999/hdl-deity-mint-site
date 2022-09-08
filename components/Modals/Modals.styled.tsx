@@ -26,6 +26,10 @@ export const MsgDiv = styled.div`
   gap: 1em;
 `;
 
+export const LinkDiv = styled(MsgDiv)`
+  flex-direction: column;
+`;
+
 export const Text = styled.span`
   color: ${(props) => props.theme.colors.textMain};
   font-size: 1.25rem;
@@ -34,6 +38,20 @@ export const Text = styled.span`
   text-align: center;
   line-height: 1.5;
   max-width: 30ch;
+`;
+
+export const Link = styled.a`
+  color: ${(props) => props.theme.colors.textMain};
+  font-size: 1.25rem;
+  font-weight: 500;
+  max-width: 30ch;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 30ch;
+
+  :hover {
+    color: ${(props) => props.theme.colors.hover};
+  }
 `;
 
 export const Button = styled.button`

@@ -4,8 +4,12 @@ export const checkIfMintActive = async (contract: Contract) => {
   return (await contract.methods.isMintActive().call()) as boolean;
 };
 
-export const fetchCurrentSupply = async (contract: Contract) => {
-  return (await contract.methods.getCurrentSupply().call()) as number;
+export const checkIfSupply = async (contract: Contract) => {
+  // const maxSupply = await contract.methods.maxSupply().call();
+  const maxSupply = 5000;
+  const currentSupply = (await contract.methods.totalSupply().call()) as number;
+
+  return currentSupply < maxSupply;
 };
 
 export const checkIfUserHasMinted = async (
@@ -16,5 +20,5 @@ export const checkIfUserHasMinted = async (
 };
 
 export const callSafeMint = async (contract: Contract, account: string) => {
-  return await contract.methods.safeMint(account).send({ from: account });
+  return await contract.methods.safeMint().send({ from: account });
 };
