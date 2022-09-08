@@ -7,7 +7,7 @@ import DynamicHero from 'components/Hero/DynamicHero';
 import Slider from 'components/Slider/Slider';
 import { sliderMedia } from 'components/Slider/sliderMedia';
 import { useMintDate } from 'hooks/useIsMintLive';
-import DynamicFallback from 'components/Fallback Page/DynamicFallback';
+import DynamicFallback from 'components/FallbackPage/DynamicFallback';
 
 const AppContainer = styled.div`
   min-height: 100vh;

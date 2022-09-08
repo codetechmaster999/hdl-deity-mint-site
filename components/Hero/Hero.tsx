@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useMintDate } from 'hooks/useIsMintLive';
 import Web3Buttons from '../Web3/Web3Buttons';
 import * as St from './Hero.styled';
-import { useMintDate } from 'hooks/useIsMintLive';
 
 const Hero: React.FC = () => {
-  const { isMintLive, mintStart } = useMintDate();
+  const { isMintLive, mintStart, mintEnd } = useMintDate();
 
   return (
     <St.HeroContainer>
@@ -18,10 +18,17 @@ const Hero: React.FC = () => {
         <St.SubtleText>LIMIT ONE PER WALLET.</St.SubtleText>
 
         <St.CountdownDiv>
-          <St.CountdownStyled date={mintStart} />
-          <St.SubtleText>
-            {isMintLive ? 'REMAINING' : 'UNTIL LAUNCH'}
-          </St.SubtleText>
+          {isMintLive ? (
+            <>
+              <St.CountdownStyled date={mintEnd} />
+              <St.SubtleText>REMAINING</St.SubtleText>
+            </>
+          ) : (
+            <>
+              <St.CountdownStyled date={mintStart} />
+              <St.SubtleText>UNTIL LAUNCH</St.SubtleText>
+            </>
+          )}
         </St.CountdownDiv>
       </St.SubtleDiv>
     </St.HeroContainer>
