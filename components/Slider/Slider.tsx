@@ -33,6 +33,7 @@ const Slider: React.FC<Props> = ({ children }) => {
   // Position slider on resize
   useEffect(() => {
     if (sliderRef && sliderRef.current) {
+      if (currentPage === totalPages) setCurrentPage(0);
       if (currentPage > totalPages) setCurrentPage(totalPages);
       sliderRef.current.style.transform = `translate3D(-${
         currentPage * scrollSize
