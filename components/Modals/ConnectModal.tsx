@@ -45,6 +45,8 @@ const ConnectModal: React.FC<Props> = ({ setShowModal, setIsConnecting }) => {
         <St.XButton src="/icons/x-icon-lg.svg" onClick={handleCloseModal} />
       </St.MsgDiv>
 
+      <St.SubtleText>[ SET WALLET TO ETHEREUM NETWORK ]</St.SubtleText>
+
       <St.Button onClick={() => handleConnectWallet(Connectors.Injected)}>
         METAMASK
       </St.Button>
