@@ -27,6 +27,7 @@ const AppContainer = styled.div`
     padding-left: 25px;
     padding-right: 25px;
     margin-top: 0;
+    margin-bottom: 18px;
     text-align: center;
     z-index: 5;
     background: rgba(0, 0, 0, 0.3);

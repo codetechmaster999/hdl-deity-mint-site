@@ -8,8 +8,8 @@ const Hero: React.FC = () => {
 
   return (
     <St.HeroContainer>
-      <St.Title>HDL CORPORATE LOGO COLLECTION</St.Title>
-      <St.SubTitle>[ HDL LOGO ]</St.SubTitle>
+      <St.Title>PRE-GENESIS COLLECTION</St.Title>
+      <St.SubTitle>[ THE DEITY ]</St.SubTitle>
 
       <Web3Buttons />
 
@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
         <St.SubtleText>FREE MINT.</St.SubtleText>
         <St.SubtleText>LIMIT ONE PER WALLET.</St.SubtleText>
 
-        {/* <St.CountdownDiv>
+        <St.CountdownDiv>
           {isMintLive ? (
             <>
               <St.CountdownStyled date={mintEnd} />
@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
               <St.SubtleText>UNTIL LAUNCH</St.SubtleText>
             </>
           )}
-        </St.CountdownDiv> */}
+        </St.CountdownDiv>
       </St.SubtleDiv>
     </St.HeroContainer>
   );

@@ -58,9 +58,9 @@ export const SliderItemDiv = styled.div<Props>`
 
 export const Reflection = styled.div`
   position: absolute;
-  bottom: -61.5%;
+  bottom: -100%;
   transform: scaleY(-1);
-  opacity: 0.6;
+  // opacity: 0.6;
   height: 100%;
   filter: blur(1px);
 
@@ -70,24 +70,11 @@ export const Reflection = styled.div`
 
   &:after {
     content: '';
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), black);
-    height: 250px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), black);
+    height: 325px;
     width: 100%;
-    margin-top: -250px;
+    margin-top: -325px;
     position: absolute;
     z-index: 2;
-  }
-`;
-
-export const Overlay = styled.div`
-  position: absolute;
-  height: 200px;
-  width: 100%;
-  top: -50%;
-  // background: linear-gradient(to top, rgba(0, 0, 0, 0.2), black);
-  z-index: 2;
-
-  @media (max-width: 725px) {
-    top: -75%;
   }
 `;
