@@ -25,7 +25,7 @@ export const SliderItemDiv = styled.div<Props>`
         ${(props) => props.slideMargin * 2}px
     );
 
-  img {
+  video {
     height: 100%;
     width: 100%;
     box-sizing: border-box;
