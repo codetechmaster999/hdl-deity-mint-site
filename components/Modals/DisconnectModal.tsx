@@ -19,19 +19,24 @@ const ConnectModal: React.FC<Props> = ({ setShowModal }) => {
   };
 
   return (
-    <St.CenterModalContainer>
-      <St.MsgDiv>
-        <St.Text>WOULD YOU LIKE TO DISCONNECT?</St.Text>
-        <St.XButton src="/icons/x-icon-lg.svg" onClick={handleCloseModal} />
-      </St.MsgDiv>
+    <>
+      <St.ModalBackground onClick={handleCloseModal}></St.ModalBackground>
+      <St.CenterModalContainer>
+        <St.MsgDiv>
+          <St.Text>WOULD YOU LIKE TO DISCONNECT?</St.Text>
+          <St.XButton src="/icons/x-icon-lg.svg" onClick={handleCloseModal} />
+        </St.MsgDiv>
 
-      <St.LittleButtonDiv>
-        <St.LittleButton onClick={handleDisconnectWallet}>YES</St.LittleButton>
-        <St.LittleButton onClick={handleCloseModal}>NO</St.LittleButton>
-      </St.LittleButtonDiv>
+        <St.LittleButtonDiv>
+          <St.LittleButton onClick={handleDisconnectWallet}>
+            YES
+          </St.LittleButton>
+          <St.LittleButton onClick={handleCloseModal}>NO</St.LittleButton>
+        </St.LittleButtonDiv>
 
-      <St.SubtleText>[ WILL RECONNECT ON REFRESH ]</St.SubtleText>
-    </St.CenterModalContainer>
+        <St.SubtleText>[ WILL RECONNECT ON REFRESH ]</St.SubtleText>
+      </St.CenterModalContainer>
+    </>
   );
 };
 
