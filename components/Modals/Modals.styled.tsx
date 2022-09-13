@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 
+export const ModalBackground = styled.div`
+  height: 150vh;
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+`;
+
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
