@@ -7,6 +7,10 @@ export const ModalBackground = styled.div`
   z-index: 10;
   background: rgba(0, 0, 0, 0.6);
   cursor: pointer;
+
+  @media (max-width: 500px) {
+    height: 200vh;
+  }
 `;
 
 export const ModalContainer = styled.div`
