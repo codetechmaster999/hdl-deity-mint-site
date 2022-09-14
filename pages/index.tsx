@@ -8,7 +8,7 @@ import NavBar from 'components/NavBar/NavBar';
 import DynamicHero from 'components/Hero/DynamicHero';
 import Slider from 'components/Slider/Slider';
 import { sliderMedia } from 'components/Slider/sliderMedia';
-import { useMintDate } from 'hooks/useIsMintLive';
+import { useMintDetails } from 'hooks/useMintDetails';
 import DynamicFallback from 'components/FallbackPage/DynamicFallback';
 
 const AppContainer = styled.div`
@@ -36,7 +36,7 @@ const AppContainer = styled.div`
 
 const Home: NextPage = () => {
   const nodeEnv = process.env.NODE_ENV;
-  const { isMintLive } = useMintDate();
+  const { isMintLive } = useMintDetails();
   const { query } = useRouter();
 
   const [showFallback, setShowFallback] = useState(true);
