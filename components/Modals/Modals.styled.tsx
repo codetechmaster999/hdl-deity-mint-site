@@ -4,7 +4,7 @@ export const ModalBackground = styled.div`
   height: 150vh;
   width: 100%;
   position: absolute;
-  z-index: 10;
+  z-index: 30;
   background: rgba(0, 0, 0, 0.6);
   color: pink;
   backdrop-filter: blur(4px);
@@ -13,6 +13,10 @@ export const ModalBackground = styled.div`
   @media (max-width: 500px) {
     height: 200vh;
   }
+`;
+
+export const BuyModalBackground = styled(ModalBackground)`
+  z-index: 10;
 `;
 
 export const ModalContainer = styled.div`
@@ -26,8 +30,14 @@ export const ModalContainer = styled.div`
   background-color: ${(props) => props.theme.colors.bgMain};
   border: 3px solid ${(props) => props.theme.colors.textMain};
   padding: 1.75em 1.5em;
-  z-index: 69;
+  z-index: 40;
   min-width: 300px;
+`;
+
+export const BuyModalContainer = styled(ModalContainer)`
+  gap: 2.5em;
+  min-width: 400px;
+  z-index: 20;
 `;
 
 export const CenterModalContainer = styled(ModalContainer)`
@@ -105,6 +115,16 @@ export const LittleButtonDiv = styled.div`
 
 export const LittleButton = styled(Button)`
   min-width: 120px;
+`;
+
+export const PlusMinusDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const PlusMinusButton = styled(Button)`
+  min-width: 80px;
 `;
 
 export const SubtleText = styled.span`

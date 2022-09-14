@@ -1,9 +1,9 @@
 import React from 'react';
-import { useMintDate } from 'hooks/useIsMintLive';
+import { useMintDetails } from 'hooks/useMintDetails';
 import * as St from './Fallback.Syled';
 
 const FallbackPage: React.FC = () => {
-  const { mintStart } = useMintDate();
+  const { mintStart } = useMintDetails();
 
   const now = Date.now();
 

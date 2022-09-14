@@ -58,3 +58,10 @@ export const mintToken = async (
 
   handleSuccess(successInfo);
 };
+
+export const switchChain = async (chainId: string) => {
+  await window.ethereum?.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId }],
+  });
+};

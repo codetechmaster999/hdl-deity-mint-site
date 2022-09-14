@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useMintDate } from 'hooks/useIsMintLive';
+import { useMintDetails } from 'hooks/useMintDetails';
 import Web3Buttons from '../Web3/Web3Buttons';
 import * as St from './Hero.styled';
 
 const Hero: React.FC = () => {
-  const { isMintLive, mintStart, mintEnd } = useMintDate();
+  const { maxSupply, mintPrice } = useMintDetails();
   const nftsRemaining = 1000;
 
   return (
@@ -15,26 +15,12 @@ const Hero: React.FC = () => {
       <Web3Buttons />
 
       <St.SubtleDiv>
-        <St.SubtleText>0.11588164 (ETH).</St.SubtleText>
-        <St.SubtleText>1000 TOTAL.</St.SubtleText>
+        <St.SubtleText>{mintPrice} (ETH).</St.SubtleText>
+        <St.SubtleText>{maxSupply} TOTAL.</St.SubtleText>
         <St.YellowText>
+          {/* TODO: get real supply remaining */}
           {nftsRemaining} <St.SubtleText>REMAINING.</St.SubtleText>
         </St.YellowText>
-        {/*
-        <St.CountdownDiv>
-          {isMintLive ? (
-            <>
-              <St.CountdownStyled date={mintEnd} />
-              <St.SubtleText>REMAINING</St.SubtleText>
-            </>
-          ) : (
-            <>
-              <St.CountdownStyled date={mintStart} />
-              <St.SubtleText>UNTIL LAUNCH</St.SubtleText>
-            </>
-          )}
-        </St.CountdownDiv>
-        */}
       </St.SubtleDiv>
     </St.HeroContainer>
   );
