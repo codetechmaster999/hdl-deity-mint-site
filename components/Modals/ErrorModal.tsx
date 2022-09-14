@@ -12,15 +12,18 @@ const ErrorModal: React.FC<Props> = ({ setShowModal, message }) => {
   };
 
   return (
-    <St.CenterModalContainer>
-      <St.MsgDiv>
-        <St.Text>{message}</St.Text>
-      </St.MsgDiv>
+    <>
+      <St.ModalBackground onClick={handleCloseModal}></St.ModalBackground>
+      <St.CenterModalContainer>
+        <St.MsgDiv>
+          <St.Text>{message}</St.Text>
+        </St.MsgDiv>
 
-      <St.LittleButtonDiv>
-        <St.LittleButton onClick={handleCloseModal}>CLOSE</St.LittleButton>
-      </St.LittleButtonDiv>
-    </St.CenterModalContainer>
+        <St.LittleButtonDiv>
+          <St.LittleButton onClick={handleCloseModal}>CLOSE</St.LittleButton>
+        </St.LittleButtonDiv>
+      </St.CenterModalContainer>
+    </>
   );
 };
 

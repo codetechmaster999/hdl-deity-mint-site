@@ -75,7 +75,11 @@ const Slider: React.FC<Props> = ({ children }) => {
   };
 
   return (
-    <St.SliderWrapper zoomFactor={zoomFactor} visibleSlides={visibleSlides}>
+    <St.SliderWrapper
+      zoomFactor={zoomFactor}
+      visibleSlides={visibleSlides}
+      slideMargin={slideMargin}
+    >
       <St.SliderDiv
         visibleSlides={visibleSlides}
         transformValue={transformValue}

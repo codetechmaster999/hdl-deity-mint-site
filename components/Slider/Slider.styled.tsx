@@ -4,6 +4,7 @@ import { SliderItemDiv } from './SliderItem.styled';
 type SliderWrapperProps = {
   zoomFactor: number;
   visibleSlides: number;
+  slideMargin: number;
 };
 
 type SliderProps = {
@@ -20,30 +21,28 @@ export const SliderWrapper = styled.div<SliderWrapperProps>`
   position: relative;
   margin-top: 2rem;
   width: 100%;
-  height: 550px;
+  height: 650px;
   padding: ${(props) => (props.zoomFactor / props.visibleSlides) * 0.7 + '%'} 0;
-  margin-bottom: -5em;
-
-  @media (max-width: 500px) {
-    margin-bottom: -6em;
-  }
+  margin-bottom: 2em;
 
   .button-wrapper {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 48px;
-    height: 225px;
+    height: 275px;
     top: 0;
-    padding: ${(props) => props.zoomFactor / 7 + '%'} 0;
+    margin-top: ${(props) =>
+      (props.zoomFactor / props.visibleSlides) * 0.7 + '%'};
     box-sizing: border-box;
   }
 
   .button {
-    display: block;
     background: none;
     border: 0;
-    top: 0;
     width: 48px;
-    height: 100%;
+    height: fit-content;
     color: #fff;
     font-size: 5rem;
     font-weight: 800;
@@ -51,12 +50,6 @@ export const SliderWrapper = styled.div<SliderWrapperProps>`
     outline: none;
     transition: all 0.7s;
     user-select: none;
-    @media (max-width: 600px) {
-      margin-top: 20px;
-    }
-    @media (max-width: 450px) {
-      margin-top: 8px;
-    }
     :hover {
       opacity: 0.5;
     }

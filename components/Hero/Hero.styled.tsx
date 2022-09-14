@@ -56,6 +56,11 @@ export const SubtleText = styled.span`
   font-size: 16px;
 `;
 
+export const YellowText = styled.span`
+  color: ${(props) => props.theme.colors.hover};
+  font-size: 16px;
+`;
+
 export const CountdownDiv = styled.div`
   display: flex;
 `;

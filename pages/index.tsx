@@ -24,9 +24,10 @@ const AppContainer = styled.div`
 
   p {
     color: ${(props) => props.theme.colors.textOffset};
-    padding-left: 25px;
-    padding-right: 25px;
-    margin-top: 0;
+    padding-left: 55px;
+    padding-right: 55px;
+    margin-top: 10px;
+    margin-bottom: 18px;
     text-align: center;
     z-index: 5;
     background: rgba(0, 0, 0, 0.3);
@@ -58,7 +59,7 @@ const Home: NextPage = () => {
   return (
     <AppContainer>
       <Head>
-        <title>HDL Corporate Logo Mint</title>
+        <title>Pre Genesis Mint (The Deity)</title>
         <meta
           name="description"
           content="HDL will mint its iconic corporate pigeon logo for free for the
@@ -74,15 +75,21 @@ const Home: NextPage = () => {
           <Slider>
             {sliderMedia.map((nft) => (
               <div key={nft.id}>
-                <img src={nft.video_url} alt="slide" />
+                <video loop autoPlay muted>
+                  <source src={nft.video_url} type="video/mp4" />
+                </video>
               </div>
             ))}
           </Slider>
           <p>
-            HDL will mint its iconic corporate pigeon logo for free for the
-            public to own, the minting will be a 72 hour window. The logo NFT’s
-            will come in several varieties with varying degrees of rarity.
-            Future utility will be announced.
+            The Pre-Genesis Collection, otherwise referred to as “The Deity,”
+            will feature 1000 NFTs as unique digital representations of the
+            sculpture “The Deity” in various virtual backgrounds. In tandem with
+            the offering of unique digital sculptures, HDL will also donate the
+            physical sculpture and will announce the location. This collection
+            will be available for purchase on September 18, 2022 at 2:22 pm EST
+            via the HDL website. To reserve a spot to purchase this collection
+            please visit Premint.
           </p>
         </>
       ) : (

@@ -39,24 +39,29 @@ const ConnectModal: React.FC<Props> = ({ setShowModal, setIsConnecting }) => {
   }, [txMsg]);
 
   return (
-    <St.ModalContainer>
-      <St.MsgDiv>
-        <St.Text>{txMsg ? txMsg : 'CHOOSE CONNECT METHOD'}</St.Text>
-        <St.XButton src="/icons/x-icon-lg.svg" onClick={handleCloseModal} />
-      </St.MsgDiv>
+    <>
+      <St.ModalBackground onClick={handleCloseModal}></St.ModalBackground>
+      <St.ModalContainer>
+        <St.MsgDiv>
+          <St.Text>{txMsg ? txMsg : 'CHOOSE CONNECT METHOD'}</St.Text>
+          <St.XButton src="/icons/x-icon-lg.svg" onClick={handleCloseModal} />
+        </St.MsgDiv>
 
-      <St.SubtleText>[ SET WALLET TO ETHEREUM NETWORK ]</St.SubtleText>
+        <St.SubtleText>[ SET WALLET TO ETHEREUM NETWORK ]</St.SubtleText>
 
-      <St.Button onClick={() => handleConnectWallet(Connectors.Injected)}>
-        METAMASK
-      </St.Button>
-      <St.Button onClick={() => handleConnectWallet(Connectors.WalletConnect)}>
-        WALLETCONNECT
-      </St.Button>
-      <St.Button onClick={() => handleConnectWallet(Connectors.Coinbase)}>
-        COINBASE
-      </St.Button>
-    </St.ModalContainer>
+        <St.Button onClick={() => handleConnectWallet(Connectors.Injected)}>
+          METAMASK
+        </St.Button>
+        <St.Button
+          onClick={() => handleConnectWallet(Connectors.WalletConnect)}
+        >
+          WALLETCONNECT
+        </St.Button>
+        <St.Button onClick={() => handleConnectWallet(Connectors.Coinbase)}>
+          COINBASE
+        </St.Button>
+      </St.ModalContainer>
+    </>
   );
 };
 

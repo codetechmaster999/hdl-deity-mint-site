@@ -15,21 +15,24 @@ const ErrorModal: React.FC<Props> = ({ setShowModal, successInfo }) => {
   };
 
   return (
-    <St.CenterModalContainer>
-      <St.LinkDiv>
-        <St.Text>{message}</St.Text>
-        <St.Link href={openseaLink} target="_blank">
-          OPENSEA
-        </St.Link>
-        <St.Link href={etherscanLink} target="_blank">
-          ETHERSCAN
-        </St.Link>
-      </St.LinkDiv>
+    <>
+      <St.ModalBackground onClick={handleCloseModal}></St.ModalBackground>
+      <St.CenterModalContainer>
+        <St.LinkDiv>
+          <St.Text>{message}</St.Text>
+          <St.Link href={openseaLink} target="_blank">
+            OPENSEA
+          </St.Link>
+          <St.Link href={etherscanLink} target="_blank">
+            ETHERSCAN
+          </St.Link>
+        </St.LinkDiv>
 
-      <St.LittleButtonDiv>
-        <St.LittleButton onClick={handleCloseModal}>CLOSE</St.LittleButton>
-      </St.LittleButtonDiv>
-    </St.CenterModalContainer>
+        <St.LittleButtonDiv>
+          <St.LittleButton onClick={handleCloseModal}>CLOSE</St.LittleButton>
+        </St.LittleButtonDiv>
+      </St.CenterModalContainer>
+    </>
   );
 };
 
