@@ -7,6 +7,7 @@ import ConnectModal from 'components/Modals/ConnectModal';
 import DisconnectModal from 'components/Modals/DisconnectModal';
 import ErrorModal from 'components/Modals/ErrorModal';
 import SuccessModal from 'components/Modals/SuccessModal';
+import { CrossmintPayButton } from '@crossmint/client-sdk-react-ui';
 import * as St from '../Hero/Hero.styled';
 
 const Web3Buttons: React.FC = () => {
@@ -88,6 +89,7 @@ const Web3Buttons: React.FC = () => {
     <St.ButtonContainer>
       <St.Button onClick={handleConnectClick}>{connectButtonText}</St.Button>
       <St.Button onClick={handleMintClick}>{mintButtonText}</St.Button>
+      <St.Button>CREDIT CARD</St.Button>
 
       {showConnectModal && (
         <ConnectModal

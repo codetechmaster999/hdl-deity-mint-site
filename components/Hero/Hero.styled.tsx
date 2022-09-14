@@ -18,6 +18,10 @@ export const ButtonContainer = styled.div`
   gap: 1em;
   width: 35%;
   max-width: 450px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 1.5em;
+  }
 `;
 
 export const Title = styled.h1`
@@ -91,7 +95,8 @@ export const Button = styled.button`
     font-weight: 700;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
+    width: 300px;
     min-width: 150px;
   }
 `;
