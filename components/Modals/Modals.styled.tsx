@@ -6,6 +6,8 @@ export const ModalBackground = styled.div`
   position: absolute;
   z-index: 10;
   background: rgba(0, 0, 0, 0.6);
+  color: pink;
+  backdrop-filter: blur(4px);
   cursor: pointer;
 
   @media (max-width: 500px) {
