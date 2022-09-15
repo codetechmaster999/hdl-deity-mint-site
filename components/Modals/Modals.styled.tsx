@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { YellowText } from 'components/Hero/Hero.styled';
 
 export const ModalBackground = styled.div`
   height: 150vh;
@@ -35,9 +36,15 @@ export const ModalContainer = styled.div`
 `;
 
 export const BuyModalContainer = styled(ModalContainer)`
-  gap: 2.5em;
+  //gap: 2.5em;
+  justify-content: space-evenly;
   min-width: 400px;
+  min-height: 425px;
   z-index: 20;
+  padding: 1.5em 2.5em;
+  @media (max-width: 500px) {
+    min-width: 350px;
+  }
 `;
 
 export const CenterModalContainer = styled(ModalContainer)`
@@ -49,6 +56,10 @@ export const MsgDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 1em;
+`;
+
+export const UnitDiv = styled(MsgDiv)`
+  justify-content: center;
 `;
 
 export const LinkDiv = styled(MsgDiv)`
@@ -120,13 +131,32 @@ export const LittleButton = styled(Button)`
 export const PlusMinusDiv = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 export const PlusMinusButton = styled(Button)`
-  min-width: 80px;
+  min-width: 55px;
+  min-height: 55px;
+  font-size: 30px;
+
+  :disabled {
+    color: ${(props) => props.theme.colors.textOffset};
+    border-color: ${(props) => props.theme.colors.textOffset};
+
+    :hover {
+      background: none;
+    }
+  }
 `;
 
 export const SubtleText = styled.span`
   color: ${(props) => props.theme.colors.textOffset};
+`;
+
+export const UnitText = styled(Text)`
+  color: ${(props) => props.theme.colors.hover};
+`;
+
+export const CounterText = styled(YellowText)`
+  font-size: 30px;
 `;
