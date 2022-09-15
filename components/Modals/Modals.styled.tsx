@@ -36,12 +36,12 @@ export const ModalContainer = styled.div`
 `;
 
 export const BuyModalContainer = styled(ModalContainer)`
-  //gap: 2.5em;
+  gap: 2em;
   justify-content: space-evenly;
   min-width: 400px;
-  min-height: 425px;
+  /* min-height: 425px; */
   z-index: 20;
-  padding: 1.5em 2.5em;
+  padding: 2.5em 2.5em;
   @media (max-width: 500px) {
     min-width: 350px;
   }
@@ -70,10 +70,9 @@ export const Text = styled.span`
   color: ${(props) => props.theme.colors.textMain};
   font-size: 1.25rem;
   font-weight: 500;
-  max-width: 30ch;
   text-align: center;
   line-height: 1.5;
-  max-width: 30ch;
+  max-width: 25ch;
 `;
 
 export const Link = styled.a`
@@ -83,7 +82,6 @@ export const Link = styled.a`
   max-width: 30ch;
   text-align: center;
   line-height: 1.5;
-  max-width: 30ch;
 
   :hover {
     color: ${(props) => props.theme.colors.hover};

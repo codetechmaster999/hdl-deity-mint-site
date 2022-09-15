@@ -20,7 +20,9 @@ const BuyModal: React.FC<Props> = ({
 }) => {
   const { mintPrice, maxMint, discountPrice } = useMintDetails();
   const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState(mintPrice.toFixed(2));
+  const [total, setTotal] = useState(
+    isDiscount ? discountPrice.toFixed(2) : mintPrice.toFixed(2),
+  );
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -43,9 +45,17 @@ const BuyModal: React.FC<Props> = ({
     <>
       <St.BuyModalBackground onClick={handleCloseModal} />
       <St.BuyModalContainer>
-        <St.MsgDiv>
-          <St.Text>CHOOSE QUANTITY</St.Text>
-          <St.XButton src="/icons/x-icon-lg.svg" onClick={handleCloseModal} />
+        {/* <St.XButton
+          src="/icons/x-icon-lg.svg"
+          onClick={handleCloseModal}
+          style={{ alignSelf: 'flex-end' }}
+        /> */}
+        <St.MsgDiv style={{ justifyContent: 'center' }}>
+          <St.Text>
+            {isDiscount
+              ? 'YOU GET A FLOCKER DISCOUNT ON ONE MINT'
+              : 'CHOOSE QUANTITY'}
+          </St.Text>
         </St.MsgDiv>
         <St.UnitDiv>
           <St.SubtleText>MAX: {maxMint}</St.SubtleText>
@@ -53,7 +63,7 @@ const BuyModal: React.FC<Props> = ({
             PRICE: {isDiscount ? discountPrice : mintPrice}(ETH)
           </St.SubtleText>
         </St.UnitDiv>
-        <St.UnitDiv style={{ marginTop: '-15px' }}>
+        <St.UnitDiv>
           <St.UnitText style={{ color: '#fff', fontWeight: 500 }}>
             TOTAL:{' '}
             <St.UnitText style={{ marginLeft: '0.25em' }}>

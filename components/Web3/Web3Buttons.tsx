@@ -67,6 +67,13 @@ const Web3Buttons: React.FC = () => {
     setShowSuccessModal(true);
   };
 
+  const closeAllModals = () => {
+    setShowConnectModal(false);
+    setShowBuyModal(false);
+    setShowErrorModal(false);
+    setShowSuccessModal(false);
+  };
+
   useEffect(() => {
     if (active) {
       setCryptoButtonText('MINT');
@@ -75,7 +82,10 @@ const Web3Buttons: React.FC = () => {
       }, 1500);
     }
 
-    if (!active) setCryptoButtonText('CONNECT WALLET');
+    if (!active) {
+      setCryptoButtonText('CONNECT WALLET');
+      closeAllModals();
+    }
   }, [active]);
 
   return (
