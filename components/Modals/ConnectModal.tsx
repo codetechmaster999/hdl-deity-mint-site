@@ -18,9 +18,10 @@ const ConnectModal: React.FC<Props> = ({ setShowModal }) => {
     const connector = connectors[connectorToUse];
 
     try {
-      if (connector.getChainId().valueOf() !== '0x1') {
-        if (window.ethereum) await switchChain('0x1');
-        else return alert('PLEASE SET YOUR WALLET TO THE ETHEREUM NETWORK');
+      if (connectorToUse === Connectors.Injected) {
+        if (connector.getChainId().valueOf() !== '0x1') {
+          await switchChain('0x1');
+        }
       }
       await activate(connector);
       if (active) setTxMsg('SUCCESSFULLY CONNECTED');

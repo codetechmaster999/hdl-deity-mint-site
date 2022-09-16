@@ -19,6 +19,7 @@ const Web3Buttons: React.FC = () => {
 
   const [payWithCard, setPayWithCard] = useState(false);
   const [isDiscount, setIsDiscount] = useState(false);
+  // TODO: check if discount
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
