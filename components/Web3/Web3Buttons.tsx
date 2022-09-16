@@ -80,7 +80,7 @@ const Web3Buttons: React.FC = () => {
       setCryptoButtonText('MINT');
       setTimeout(() => {
         setShowConnectModal(false);
-      }, 1500);
+      }, 2000);
     }
 
     if (!active) {
