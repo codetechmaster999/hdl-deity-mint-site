@@ -1,11 +1,11 @@
 import { AbiItem } from 'web3-utils';
-import abi from '../web3/HdlLogo.abi.json';
+import abi from '../web3/HdlStorefront.abi.json';
 import { useWeb3 } from './useWeb3';
 
 export const useContract = () => {
   const web3 = useWeb3();
-  const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string;
+  const contractAddress = '0xAe30b5bfad3af41eCc667F0E31eD8eA44DB6B040';
 
-  const contract = new web3.eth.Contract(abi.abi as AbiItem[], contractAddress);
+  const contract = new web3.eth.Contract(abi as AbiItem[], contractAddress);
   return contract;
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { AllowlistStatus } from 'utils/getAllowlistStatus';
 import { Contract } from 'web3-eth-contract';
 import {
   checkIfMintActive,
@@ -8,15 +9,16 @@ import {
 } from 'web3/web3Fetches';
 
 const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string;
+// TODO: Fix this
 
-const urls = {
-  openSea: `https://opensea.io/assets/ethereum/${contractAddress}/`,
-  etherscan: `https://etherscan.io/tx/`,
-};
 // const urls = {
-//   openSea: `https://testnets.opensea.io/assets/rinkeby/${contractAddress}/`,
-//   etherscan: `https://rinkeby.etherscan.io/tx/`,
+//   openSea: `https://opensea.io/assets/ethereum/${contractAddress}/`,
+//   etherscan: `https://etherscan.io/tx/`,
 // };
+const urls = {
+  openSea: `https://testnets.opensea.io/assets/rinkeby/${contractAddress}/`,
+  etherscan: `https://rinkeby.etherscan.io/tx/`,
+};
 
 export interface ISuccessInfo {
   message: string;
@@ -34,13 +36,12 @@ export const mintToken = async (
   const isMintActive = await checkIfMintActive(contract);
   if (!isMintActive) return handleError('MINT IS NOT ACTIVE');
 
-  const isSupplyRemaining = await checkIfSupply(contract);
-  if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
-
-  const hasUserMinted = await checkIfUserHasMinted(contract, account);
-  if (hasUserMinted) return handleError('LIMIT ONE PER WALLET');
+  // const isSupplyRemaining = await checkIfSupply(contract);
+  // if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
+  // TODO: This
 
   setMintButtonText('MINTING...');
+
   const txObj = await callSafeMint(contract, account);
   if (!txObj) return handleError('MINT FAILED');
 

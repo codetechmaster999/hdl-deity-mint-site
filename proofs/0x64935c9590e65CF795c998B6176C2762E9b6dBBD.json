@@ -1,0 +1,10 @@
+{
+  "address": "0x64935c9590e65CF795c998B6176C2762E9b6dBBD",
+  "allowlist": [
+    "0x13eef07ecee3703081a217fb402e76f8833ea2ca2e08c3b74a2a81c2bd1d13f4",
+    "0x60e319ef35ee018d010842669808b26d938dd8752029881f59db25983ff8bbc2"
+  ],
+  "snapshot": [
+    "0x13eef07ecee3703081a217fb402e76f8833ea2ca2e08c3b74a2a81c2bd1d13f4"
+  ]
+}

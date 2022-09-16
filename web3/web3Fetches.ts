@@ -1,12 +1,12 @@
 import { Contract } from 'web3-eth-contract';
 
 export const checkIfMintActive = async (contract: Contract) => {
-  return (await contract.methods.isMintActive().call()) as boolean;
+  return (await contract.methods.saleHasStated().call()) as boolean;
 };
 
 export const checkIfSupply = async (contract: Contract) => {
   // const maxSupply = await contract.methods.maxSupply().call();
-  const maxSupply = 5000;
+  const maxSupply = 1000;
   const currentSupply = (await contract.methods.totalSupply().call()) as number;
 
   return currentSupply < maxSupply;
