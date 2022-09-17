@@ -3,7 +3,8 @@ import Web3 from 'web3';
 import { useWeb3React } from '@web3-react/core';
 
 export const useWeb3 = () => {
-  const rpc = process.env.NEXT_PUBLIC_RPC_URL_1 as string;
+  // Need to switch back to _1!!!!
+  const rpc = process.env.NEXT_PUBLIC_RPC_URL_4 as string;
   const { active, library } = useWeb3React();
 
   const web3Provider = new Web3.providers.HttpProvider(rpc);
