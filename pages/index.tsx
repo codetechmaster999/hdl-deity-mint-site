@@ -88,8 +88,7 @@ const Home: NextPage = () => {
             the offering of unique digital sculptures, HDL will also donate the
             physical sculpture and will announce the location. This collection
             will be available for purchase on September 18, 2022 at 2:22 pm EST
-            via the HDL website. To reserve a spot to purchase this collection
-            please visit Premint.
+            via the HDL website.
           </p>
         </>
       ) : (

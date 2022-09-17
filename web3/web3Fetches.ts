@@ -21,11 +21,11 @@ export const checkIfSupply = async (contract: Contract, maxSupply: number) => {
   return currentSupply < maxSupply;
 };
 
-export const checkIfUserHasUsedPresale = async (
+export const checkIfUserHasClaimedDiscount = async (
   contract: Contract,
   account: string,
 ) => {
-  return (await contract.methods.checkHasMinted(account).call()) as boolean;
+  return (await contract.methods.hasClaimedDiscount(account).call()) as boolean;
 };
 
 export const callDiscountMint = async (

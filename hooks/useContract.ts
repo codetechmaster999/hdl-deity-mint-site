@@ -6,8 +6,8 @@ import { useWeb3 } from './useWeb3';
 export const useContract = () => {
   const web3 = useWeb3();
   const storefrontContractAddress =
-    '0xAe30b5bfad3af41eCc667F0E31eD8eA44DB6B040';
-  const tokenContractAddress = '0x4c2f4512320BfC06496BD1B10F02eB2AB6B9c7d2';
+    '0xaFD7183Abc81D31984E4DC3a6658cb0aCf910DE5';
+  const tokenContractAddress = '0x5343067232fE0B555f7Cb48B0C3398E7d51855BE';
 
   const storefrontContract = new web3.eth.Contract(
     storefrontAbi as AbiItem[],

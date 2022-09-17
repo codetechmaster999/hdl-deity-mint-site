@@ -4,21 +4,23 @@ import {
   checkIfMintActive,
   checkIfPresaleActive,
   checkIfSupply,
+  checkIfUserHasClaimedDiscount,
   callPublicMint,
   callPresaleMint,
   callDiscountMint,
 } from 'web3/web3Fetches';
 
-// const urls = { // mainnet urls
-// //  openSea: `https://opensea.io/assets/ethereum/`,
-//   etherscan: `https://etherscan.io/tx/`,
-// };
+// mainnet urls
+const urls = {
+  //  openSea: `https://opensea.io/assets/ethereum/`,
+  etherscan: `https://etherscan.io/tx/`,
+};
 
 //rinkeby urls
-const urls = {
-  // openSea: `https://testnets.opensea.io/assets/rinkeby/`,
-  etherscan: `https://rinkeby.etherscan.io/tx/`,
-};
+// const urls = {
+//   // openSea: `https://testnets.opensea.io/assets/rinkeby/`,
+//   etherscan: `https://rinkeby.etherscan.io/tx/`,
+// };
 
 export interface ISuccessInfo {
   message: string;
@@ -42,8 +44,14 @@ export const discountMint = async (
   if (!isPresaleActive) return handleError('MINT IS NOT ACTIVE');
 
   const isSupplyRemaining = await checkIfSupply(tokenContract, maxSupply);
-  console.log(isSupplyRemaining);
   if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
+
+  const hasUserClaimedDiscount = await checkIfUserHasClaimedDiscount(
+    storefrontContract,
+    account,
+  );
+  if (hasUserClaimedDiscount)
+    return handleError('YOU HAVE ALREADY CLAIMED YOUR DISCOUNT');
 
   setBuyButtonText('MINTING...');
   const txObj = await callDiscountMint(

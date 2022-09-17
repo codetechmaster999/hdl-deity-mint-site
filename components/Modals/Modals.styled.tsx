@@ -100,6 +100,7 @@ export const Button = styled.button`
   color: ${(props) => props.theme.colors.textMain};
   font-size: 1.25rem;
   font-weight: 500;
+  padding: 0 0.5em;
   cursor: pointer;
 
   :hover {
@@ -110,6 +111,12 @@ export const Button = styled.button`
   @media (max-width: 500px) {
     min-width: 150px;
   }
+`;
+
+export const CenterButtonDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `;
 
 export const XButton = styled.img`
