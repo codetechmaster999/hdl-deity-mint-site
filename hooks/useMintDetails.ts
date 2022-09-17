@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 export const useMintDetails = () => {
   const currentTime = new Date().getTime();
   const mintStart = Date.parse('2022-09-15T02:22:00-0400');
-  const preSalePeriod = 48 * 60 * 60 * 1000;
+  const preSalePeriod = 24 * 60 * 60 * 1000;
   const publicStart = mintStart + preSalePeriod;
   const mintEnd = Date.parse('2022-10-17T02:22:00-0400');
 
@@ -23,6 +23,8 @@ export const useMintDetails = () => {
     if (currentTime >= mintStart && currentTime <= publicStart) {
       setIsPreSale(true);
     }
+
+    console.log(isMintLive, isPreSale);
   }, [currentTime]);
 
   return {

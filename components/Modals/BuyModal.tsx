@@ -9,6 +9,7 @@ interface Props {
   isDiscount: boolean;
   handleCryptoMint: (quantity: number) => void;
   handleError: (error: string) => void;
+  buyButtonText: string;
 }
 
 const BuyModal: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const BuyModal: React.FC<Props> = ({
   isDiscount,
   handleCryptoMint,
   handleError,
+  buyButtonText,
 }) => {
   const { mintPrice, maxMint, discountPrice } = useMintDetails();
   const [quantity, setQuantity] = useState(1);
@@ -52,12 +54,14 @@ const BuyModal: React.FC<Props> = ({
               : 'CHOOSE QUANTITY'}
           </St.Text>
         </St.MsgDiv>
-        <St.UnitDiv>
-          <St.SubtleText>MAX: {maxMint}</St.SubtleText>
-          <St.SubtleText>
-            PRICE: {isDiscount ? discountPrice : mintPrice}(ETH)
-          </St.SubtleText>
-        </St.UnitDiv>
+        {!isDiscount && (
+          <St.UnitDiv>
+            <St.SubtleText>MAX: {maxMint}</St.SubtleText>
+            <St.SubtleText>
+              PRICE: {isDiscount ? discountPrice : mintPrice}(ETH)
+            </St.SubtleText>
+          </St.UnitDiv>
+        )}
         <St.UnitDiv>
           <St.UnitText style={{ color: '#fff', fontWeight: 500 }}>
             TOTAL:{' '}
@@ -90,7 +94,7 @@ const BuyModal: React.FC<Props> = ({
               : () => handleCryptoMint(quantity)
           }
         >
-          {payWithCard ? 'MINT WITH CARD' : 'MINT WITH CRYPTO'}
+          {buyButtonText}
         </St.Button>
       </St.BuyModalContainer>
     </>
