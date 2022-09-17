@@ -1,48 +1,144 @@
 import React from 'react';
-import { AllowlistStatus } from 'utils/getAllowlistStatus';
 import { Contract } from 'web3-eth-contract';
 import {
   checkIfMintActive,
+  checkIfPresaleActive,
   checkIfSupply,
-  checkIfUserHasMinted,
-  callSafeMint,
+  callPublicMint,
+  callPresaleMint,
+  callDiscountMint,
 } from 'web3/web3Fetches';
 
-const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string;
-// TODO: Fix this
-
-// const urls = {
-//   openSea: `https://opensea.io/assets/ethereum/${contractAddress}/`,
+// const urls = { // mainnet urls
+// //  openSea: `https://opensea.io/assets/ethereum/`,
 //   etherscan: `https://etherscan.io/tx/`,
 // };
+
+//rinkeby urls
 const urls = {
-  openSea: `https://testnets.opensea.io/assets/rinkeby/${contractAddress}/`,
+  // openSea: `https://testnets.opensea.io/assets/rinkeby/`,
   etherscan: `https://rinkeby.etherscan.io/tx/`,
 };
 
 export interface ISuccessInfo {
   message: string;
-  openseaLink: string;
+  // openseaLink: string;
   etherscanLink: string;
 }
 
-export const mintToken = async (
-  contract: Contract,
+export const discountMint = async (
+  storefrontContract: Contract,
+  tokenContract: Contract,
+  maxSupply: number,
   account: string,
+  payableAmount: number,
+  merkleProof: string[],
   handleError: (error: string) => void,
   handleSuccess: (successInfo: ISuccessInfo) => void,
   setMintButtonText: React.Dispatch<React.SetStateAction<string>>,
+  setShowBuyModal: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  const isMintActive = await checkIfMintActive(contract);
-  if (!isMintActive) return handleError('MINT IS NOT ACTIVE');
+  const isPresaleActive = await checkIfPresaleActive(storefrontContract);
+  if (!isPresaleActive) return handleError('MINT IS NOT ACTIVE');
 
-  // const isSupplyRemaining = await checkIfSupply(contract);
-  // if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
-  // TODO: This
+  const isSupplyRemaining = await checkIfSupply(tokenContract, maxSupply);
+  if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
 
   setMintButtonText('MINTING...');
+  const txObj = await callDiscountMint(
+    storefrontContract,
+    account,
+    payableAmount,
+    merkleProof,
+  );
+  if (!txObj) return handleError('MINT FAILED');
 
-  const txObj = await callSafeMint(contract, account);
+  const txHash = txObj.transactionHash;
+  if (!txHash) return handleError('MINT FAILED');
+
+  setMintButtonText('MINTED');
+
+  const successInfo: ISuccessInfo = {
+    message: `SUCCESSFULLY MINTED NFT`,
+    etherscanLink: `${urls.etherscan}${txHash}`,
+  };
+
+  setShowBuyModal(false);
+  handleSuccess(successInfo);
+};
+
+export const presaleMint = async (
+  storefrontContract: Contract,
+  tokenContract: Contract,
+  tokenContractAddress: string,
+  maxSupply: number,
+  account: string,
+  payableAmount: number,
+  numberOfTokens: number,
+  merkleProof: string[],
+  handleError: (error: string) => void,
+  handleSuccess: (successInfo: ISuccessInfo) => void,
+  setMintButtonText: React.Dispatch<React.SetStateAction<string>>,
+  setShowBuyModal: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+  const isPresaleActive = await checkIfPresaleActive(storefrontContract);
+  if (!isPresaleActive) return handleError('MINT IS NOT ACTIVE');
+
+  const isSupplyRemaining = await checkIfSupply(tokenContract, maxSupply);
+  if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
+
+  setMintButtonText('MINTING...');
+  const txObj = await callPresaleMint(
+    storefrontContract,
+    account,
+    payableAmount,
+    numberOfTokens,
+    merkleProof,
+  );
+  if (!txObj) return handleError('MINT FAILED');
+
+  const txHash = txObj.transactionHash;
+  if (!txHash) return handleError('MINT FAILED');
+
+  setMintButtonText('MINTED');
+
+  const successInfo: ISuccessInfo = {
+    message: `SUCCESSFULLY MINTED ${numberOfTokens} NFT${
+      numberOfTokens > 1 ? 'S' : ''
+    }`,
+    etherscanLink: `${urls.etherscan}${txHash}`,
+  };
+
+  setShowBuyModal(false);
+  handleSuccess(successInfo);
+};
+
+export const publicMint = async (
+  storefrontContract: Contract,
+  tokenContract: Contract,
+  tokenContractAddress: string,
+  maxSupply: number,
+  account: string,
+  payableAmount: number,
+  numberOfTokens: number,
+  handleError: (error: string) => void,
+  handleSuccess: (successInfo: ISuccessInfo) => void,
+  setMintButtonText: React.Dispatch<React.SetStateAction<string>>,
+  setShowBuyModal: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+  const isMintActive = await checkIfMintActive(storefrontContract);
+  if (!isMintActive) return handleError('MINT IS NOT ACTIVE');
+
+  const isSupplyRemaining = await checkIfSupply(tokenContract, maxSupply);
+  if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
+
+  setMintButtonText('MINTING...');
+  const txObj = await callPublicMint(
+    storefrontContract,
+    account,
+    payableAmount,
+    numberOfTokens,
+  );
   if (!txObj) return handleError('MINT FAILED');
 
   const txHash = txObj.transactionHash;
@@ -52,11 +148,13 @@ export const mintToken = async (
   const tokenId = txObj?.events?.Transfer?.returnValues?.tokenId as string;
 
   const successInfo: ISuccessInfo = {
-    message: `MINTED TOKEN ID #${tokenId}`,
-    openseaLink: `${urls.openSea}${tokenId}`,
+    message: `SUCCESSFULLY MINTED ${numberOfTokens} NFT${
+      numberOfTokens > 1 ? 'S' : ''
+    }`,
     etherscanLink: `${urls.etherscan}${txHash}`,
   };
 
+  setShowBuyModal(false);
   handleSuccess(successInfo);
 };
 

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ErrorModal: React.FC<Props> = ({ setShowModal, successInfo }) => {
-  const { message, openseaLink, etherscanLink } = successInfo;
+  const { message, etherscanLink } = successInfo;
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -20,9 +20,9 @@ const ErrorModal: React.FC<Props> = ({ setShowModal, successInfo }) => {
       <St.CenterModalContainer>
         <St.LinkDiv>
           <St.Text>{message}</St.Text>
-          <St.Link href={openseaLink} target="_blank">
+          {/* <St.Link href={openseaLink} target="_blank">
             OPENSEA
-          </St.Link>
+          </St.Link> */}
           <St.Link href={etherscanLink} target="_blank">
             ETHERSCAN
           </St.Link>

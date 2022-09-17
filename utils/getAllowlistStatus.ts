@@ -15,11 +15,20 @@ export const getAllowlistStatus = async (account: string) => {
 
     if (merkleProof) {
       if (merkleProof.snapshot) {
-        return AllowlistStatus.Discountlisted;
+        return {
+          allowlistStatus: AllowlistStatus.Discountlisted,
+          merkleProof: merkleProof.snapshot,
+        };
       }
-      return AllowlistStatus.Allowlisted;
+      return {
+        allowlistStatus: AllowlistStatus.Allowlisted,
+        merkleProof: merkleProof.allowlist,
+      };
     }
   } catch (error) {
-    return AllowlistStatus.NotAllowlisted;
+    return {
+      allowlistStatus: AllowlistStatus.NotAllowlisted,
+      merkleProof: [''],
+    };
   }
 };

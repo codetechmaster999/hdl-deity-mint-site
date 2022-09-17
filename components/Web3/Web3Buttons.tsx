@@ -3,7 +3,12 @@ import { useWeb3React } from '@web3-react/core';
 import { useEagerConnect } from 'hooks/useEagerConnect';
 import { useMintDetails } from 'hooks/useMintDetails';
 import { useContract } from 'hooks/useContract';
-import { mintToken, ISuccessInfo } from './web3Helpers';
+import {
+  publicMint,
+  presaleMint,
+  discountMint,
+  ISuccessInfo,
+} from './web3Helpers';
 import ConnectModal from 'components/Modals/ConnectModal';
 import BuyModal from 'components/Modals/BuyModal';
 import ErrorModal from 'components/Modals/ErrorModal';
@@ -14,17 +19,18 @@ import * as St from '../Hero/Hero.styled';
 const Web3Buttons: React.FC = () => {
   useEagerConnect();
   const { active, account } = useWeb3React();
-  const { isPreSale } = useMintDetails();
-  const contract = useContract();
+  const { isPreSale, mintPrice, maxSupply } = useMintDetails();
+  const { storefrontContract, tokenContract, tokenContractAddress } =
+    useContract();
 
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [showBuyModal, setShowBuyModal] = useState(false);
 
   const [payWithCard, setPayWithCard] = useState(false);
-  const [isDiscount, setIsDiscount] = useState(false);
-  const [allowlistStatus, setAllowlistStatus] = useState(
-    AllowlistStatus.NotAllowlisted,
-  );
+  const [allowlistInfo, setAllowlistInfo] = useState({
+    allowlistStatus: AllowlistStatus.NotAllowlisted,
+    merkleProof: [''],
+  });
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -44,7 +50,7 @@ const Web3Buttons: React.FC = () => {
       setShowConnectModal(!showConnectModal);
     } else if (
       isPreSale &&
-      allowlistStatus === AllowlistStatus.NotAllowlisted
+      allowlistInfo.allowlistStatus === AllowlistStatus.NotAllowlisted
     ) {
       handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
     } else {
@@ -59,7 +65,7 @@ const Web3Buttons: React.FC = () => {
     } else if (
       isPreSale &&
       active &&
-      allowlistStatus === AllowlistStatus.NotAllowlisted
+      allowlistInfo.allowlistStatus === AllowlistStatus.NotAllowlisted
     ) {
       handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
     } else {
@@ -68,23 +74,57 @@ const Web3Buttons: React.FC = () => {
     }
   };
 
-  const handleCryptoMint = (quantity: number) => {
-    if (allowlistStatus === AllowlistStatus.Discountlisted) {
-      // CallDiscountMint
-    } else if (isPreSale && allowlistStatus === AllowlistStatus.Allowlisted) {
-      /// Call Presale Mint
-    } else {
-      // Call normal mint
-    }
+  const handleCryptoMint = (numberOfTokens: number) => {
+    const payableAmount = numberOfTokens * mintPrice;
 
     try {
-      mintToken(
-        contract,
-        account as string,
-        handleError,
-        handleSuccess,
-        setCryptoButtonText,
-      );
+      if (allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted) {
+        // TODO: Check if user has used discount
+        discountMint(
+          storefrontContract,
+          tokenContract,
+          maxSupply,
+          account as string,
+          payableAmount,
+          allowlistInfo.merkleProof,
+          handleError,
+          handleSuccess,
+          setCryptoButtonText,
+          setShowBuyModal,
+        );
+      } else if (
+        isPreSale &&
+        allowlistInfo.allowlistStatus === AllowlistStatus.Allowlisted
+      ) {
+        presaleMint(
+          storefrontContract,
+          tokenContract,
+          tokenContractAddress,
+          maxSupply,
+          account as string,
+          payableAmount,
+          numberOfTokens,
+          allowlistInfo.merkleProof,
+          handleError,
+          handleSuccess,
+          setCryptoButtonText,
+          setShowBuyModal,
+        );
+      } else {
+        publicMint(
+          storefrontContract,
+          tokenContract,
+          tokenContractAddress,
+          maxSupply,
+          account as string,
+          payableAmount,
+          numberOfTokens,
+          handleError,
+          handleSuccess,
+          setCryptoButtonText,
+          setShowBuyModal,
+        );
+      }
     } catch (err) {
       console.error(err);
       handleError('Error minting token');
@@ -108,11 +148,14 @@ const Web3Buttons: React.FC = () => {
       if (account) {
         getAllowlistStatus(account as string)
           .then((status) => {
-            if (status) setAllowlistStatus(status);
+            if (status) setAllowlistInfo(status);
           })
           .catch((err) => {
             console.error(err);
-            setAllowlistStatus(AllowlistStatus.NotAllowlisted);
+            setAllowlistInfo({
+              allowlistStatus: AllowlistStatus.NotAllowlisted,
+              merkleProof: [''],
+            });
           });
       }
 
@@ -128,10 +171,6 @@ const Web3Buttons: React.FC = () => {
     }
   }, [active]);
 
-  // useEffect(() => {
-
-  // }, [active, account, allowlistStatus]);
-
   return (
     <St.ButtonContainer>
       <St.Button onClick={handleCryptoClick}>{cryptoButtonText}</St.Button>
@@ -143,7 +182,9 @@ const Web3Buttons: React.FC = () => {
         <BuyModal
           setShowModal={setShowBuyModal}
           payWithCard={payWithCard}
-          isDiscount={isDiscount}
+          isDiscount={
+            allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted
+          }
           handleCryptoMint={handleCryptoMint}
           handleError={handleError}
         />
