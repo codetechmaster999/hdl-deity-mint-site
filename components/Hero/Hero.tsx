@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useMintDetails } from 'hooks/useMintDetails';
 import Web3Buttons from '../Web3/Web3Buttons';
+import { useContract } from 'hooks/useContract';
+import { fetchCurrentSupply } from 'web3/web3Fetches';
 import * as St from './Hero.styled';
 
 const Hero: React.FC = () => {
   const { maxSupply, mintPrice } = useMintDetails();
-  const nftsRemaining = 1000;
+
+  const [currentSupply, setCurrentSupply] = useState(1000);
+
+  const currentContract = useContract();
+
+  const tC = currentContract.tokenContract;
+
+  useEffect(() => {
+    fetchCurrentSupply(tC).then((response) => setCurrentSupply(response));
+  }, []);
 
   return (
     <St.HeroContainer>
@@ -16,10 +27,11 @@ const Hero: React.FC = () => {
 
       <St.SubtleDiv>
         <St.SubtleText>{mintPrice} (ETH).</St.SubtleText>
-        <St.SubtleText>{maxSupply} TOTAL.</St.SubtleText>
         <St.YellowText>
-          {/* TODO: get real supply remaining */}
-          {nftsRemaining} <St.SubtleText>REMAINING.</St.SubtleText>
+          {currentSupply < 1000 ? currentSupply : maxSupply}{' '}
+          <St.SubtleText>
+            {currentSupply < 1000 ? 'NFTS REMAINING' : 'NFTS TOTAL'}.
+          </St.SubtleText>
         </St.YellowText>
       </St.SubtleDiv>
     </St.HeroContainer>
