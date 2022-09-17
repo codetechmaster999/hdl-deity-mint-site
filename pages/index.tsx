@@ -75,7 +75,7 @@ const Home: NextPage = () => {
           <Slider>
             {sliderMedia.map((nft) => (
               <div key={nft.id}>
-                <video loop autoPlay muted>
+                <video loop autoPlay muted webkit-playsInline playsInline>
                   <source src={nft.video_url} type="video/mp4" />
                 </video>
               </div>

@@ -130,11 +130,19 @@ const Web3Buttons: React.FC = () => {
     }
   };
 
-  const handleCryptoMint = (numberOfTokens: number) => {
+  const handleCryptoMint = async (numberOfTokens: number) => {
     const payableAmount = numberOfTokens * mintPrice;
 
+    const hasUserClaimedDiscount = await checkIfUserHasClaimedDiscount(
+      storefrontContract,
+      account as string,
+    );
+
     try {
-      if (allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted) {
+      if (
+        allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted &&
+        !hasUserClaimedDiscount
+      ) {
         discountMint(
           storefrontContract,
           tokenContract,
@@ -148,8 +156,10 @@ const Web3Buttons: React.FC = () => {
           setShowBuyModal,
         );
       } else if (
-        isPreSale &&
-        allowlistInfo.allowlistStatus === AllowlistStatus.Allowlisted
+        (isPreSale &&
+          allowlistInfo.allowlistStatus === AllowlistStatus.Allowlisted) ||
+        (allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted &&
+          hasUserClaimedDiscount)
       ) {
         presaleMint(
           storefrontContract,

@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
           {mintPrice}
           <St.SubtleText> (ETH).</St.SubtleText>
         </St.YellowText>
-        <St.YellowText>
+        {/* <St.YellowText>
           {priceUsd > 0
             ? new Intl.NumberFormat('en-US', {
                 style: 'currency',
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
               }).format(priceUsd * mintPrice)
             : 'Calculating...'}
           <St.SubtleText> (USD).</St.SubtleText>
-        </St.YellowText>
+        </St.YellowText> */}
         <St.YellowText>
           {currentSupply < maxSupply ? maxSupply - currentSupply : maxSupply}{' '}
           <St.SubtleText>
