@@ -35,16 +35,17 @@ export const discountMint = async (
   merkleProof: string[],
   handleError: (error: string) => void,
   handleSuccess: (successInfo: ISuccessInfo) => void,
-  setMintButtonText: React.Dispatch<React.SetStateAction<string>>,
+  setBuyButtonText: React.Dispatch<React.SetStateAction<string>>,
   setShowBuyModal: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const isPresaleActive = await checkIfPresaleActive(storefrontContract);
   if (!isPresaleActive) return handleError('MINT IS NOT ACTIVE');
 
   const isSupplyRemaining = await checkIfSupply(tokenContract, maxSupply);
+  console.log(isSupplyRemaining);
   if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
 
-  setMintButtonText('MINTING...');
+  setBuyButtonText('MINTING...');
   const txObj = await callDiscountMint(
     storefrontContract,
     account,
@@ -56,7 +57,7 @@ export const discountMint = async (
   const txHash = txObj.transactionHash;
   if (!txHash) return handleError('MINT FAILED');
 
-  setMintButtonText('MINTED');
+  setBuyButtonText('MINTED');
 
   const successInfo: ISuccessInfo = {
     message: `SUCCESSFULLY MINTED NFT`,
@@ -70,7 +71,6 @@ export const discountMint = async (
 export const presaleMint = async (
   storefrontContract: Contract,
   tokenContract: Contract,
-  tokenContractAddress: string,
   maxSupply: number,
   account: string,
   payableAmount: number,
@@ -78,7 +78,7 @@ export const presaleMint = async (
   merkleProof: string[],
   handleError: (error: string) => void,
   handleSuccess: (successInfo: ISuccessInfo) => void,
-  setMintButtonText: React.Dispatch<React.SetStateAction<string>>,
+  setBuyButtonText: React.Dispatch<React.SetStateAction<string>>,
   setShowBuyModal: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const isPresaleActive = await checkIfPresaleActive(storefrontContract);
@@ -87,7 +87,7 @@ export const presaleMint = async (
   const isSupplyRemaining = await checkIfSupply(tokenContract, maxSupply);
   if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
 
-  setMintButtonText('MINTING...');
+  setBuyButtonText('MINTING...');
   const txObj = await callPresaleMint(
     storefrontContract,
     account,
@@ -100,7 +100,7 @@ export const presaleMint = async (
   const txHash = txObj.transactionHash;
   if (!txHash) return handleError('MINT FAILED');
 
-  setMintButtonText('MINTED');
+  setBuyButtonText('MINTED');
 
   const successInfo: ISuccessInfo = {
     message: `SUCCESSFULLY MINTED ${numberOfTokens} NFT${
@@ -116,14 +116,13 @@ export const presaleMint = async (
 export const publicMint = async (
   storefrontContract: Contract,
   tokenContract: Contract,
-  tokenContractAddress: string,
   maxSupply: number,
   account: string,
   payableAmount: number,
   numberOfTokens: number,
   handleError: (error: string) => void,
   handleSuccess: (successInfo: ISuccessInfo) => void,
-  setMintButtonText: React.Dispatch<React.SetStateAction<string>>,
+  setBuyButtonText: React.Dispatch<React.SetStateAction<string>>,
   setShowBuyModal: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const isMintActive = await checkIfMintActive(storefrontContract);
@@ -132,7 +131,7 @@ export const publicMint = async (
   const isSupplyRemaining = await checkIfSupply(tokenContract, maxSupply);
   if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
 
-  setMintButtonText('MINTING...');
+  setBuyButtonText('MINTING...');
   const txObj = await callPublicMint(
     storefrontContract,
     account,
@@ -144,7 +143,7 @@ export const publicMint = async (
   const txHash = txObj.transactionHash;
   if (!txHash) return handleError('MINT FAILED');
 
-  setMintButtonText('MINTED');
+  setBuyButtonText('MINTED');
   const tokenId = txObj?.events?.Transfer?.returnValues?.tokenId as string;
 
   const successInfo: ISuccessInfo = {

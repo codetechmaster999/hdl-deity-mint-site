@@ -19,9 +19,8 @@ import * as St from '../Hero/Hero.styled';
 const Web3Buttons: React.FC = () => {
   useEagerConnect();
   const { active, account } = useWeb3React();
-  const { isPreSale, mintPrice, maxSupply } = useMintDetails();
-  const { storefrontContract, tokenContract, tokenContractAddress } =
-    useContract();
+  const { isPreSale, mintPrice, maxSupply, discountPrice } = useMintDetails();
+  const { storefrontContract, tokenContract } = useContract();
 
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [showBuyModal, setShowBuyModal] = useState(false);
@@ -39,6 +38,7 @@ const Web3Buttons: React.FC = () => {
   const [successInfo, setSuccessInfo] = useState<ISuccessInfo>();
 
   const [cryptoButtonText, setCryptoButtonText] = useState('CONNECT WALLET');
+  const [buyButtonText, setBuyButtonText] = useState('MINT WITH CRYPTO');
 
   const handleError = (error: string) => {
     setErrorMessage(error);
@@ -55,6 +55,7 @@ const Web3Buttons: React.FC = () => {
       handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
     } else {
       setPayWithCard(false);
+      setBuyButtonText('MINT WITH CRYPTO');
       setShowBuyModal(true);
     }
   };
@@ -70,6 +71,7 @@ const Web3Buttons: React.FC = () => {
       handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
     } else {
       setPayWithCard(true);
+      setBuyButtonText('MINT WITH CARD');
       setShowBuyModal(true);
     }
   };
@@ -85,11 +87,11 @@ const Web3Buttons: React.FC = () => {
           tokenContract,
           maxSupply,
           account as string,
-          payableAmount,
+          discountPrice,
           allowlistInfo.merkleProof,
           handleError,
           handleSuccess,
-          setCryptoButtonText,
+          setBuyButtonText,
           setShowBuyModal,
         );
       } else if (
@@ -99,7 +101,6 @@ const Web3Buttons: React.FC = () => {
         presaleMint(
           storefrontContract,
           tokenContract,
-          tokenContractAddress,
           maxSupply,
           account as string,
           payableAmount,
@@ -107,21 +108,20 @@ const Web3Buttons: React.FC = () => {
           allowlistInfo.merkleProof,
           handleError,
           handleSuccess,
-          setCryptoButtonText,
+          setBuyButtonText,
           setShowBuyModal,
         );
       } else {
         publicMint(
           storefrontContract,
           tokenContract,
-          tokenContractAddress,
           maxSupply,
           account as string,
           payableAmount,
           numberOfTokens,
           handleError,
           handleSuccess,
-          setCryptoButtonText,
+          setBuyButtonText,
           setShowBuyModal,
         );
       }
@@ -187,6 +187,7 @@ const Web3Buttons: React.FC = () => {
           }
           handleCryptoMint={handleCryptoMint}
           handleError={handleError}
+          buyButtonText={buyButtonText}
         />
       )}
 
