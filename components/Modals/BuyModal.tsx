@@ -45,11 +45,6 @@ const BuyModal: React.FC<Props> = ({
     <>
       <St.BuyModalBackground onClick={handleCloseModal} />
       <St.BuyModalContainer>
-        {/* <St.XButton
-          src="/icons/x-icon-lg.svg"
-          onClick={handleCloseModal}
-          style={{ alignSelf: 'flex-end' }}
-        /> */}
         <St.MsgDiv style={{ justifyContent: 'center' }}>
           <St.Text>
             {isDiscount

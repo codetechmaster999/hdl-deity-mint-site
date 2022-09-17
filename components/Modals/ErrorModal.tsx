@@ -16,7 +16,7 @@ const ErrorModal: React.FC<Props> = ({ setShowModal, message }) => {
       <St.ModalBackground onClick={handleCloseModal}></St.ModalBackground>
       <St.CenterModalContainer>
         <St.MsgDiv>
-          <St.Text>{message}</St.Text>
+          <St.UnitText>{message}</St.UnitText>
         </St.MsgDiv>
 
         <St.LittleButtonDiv>

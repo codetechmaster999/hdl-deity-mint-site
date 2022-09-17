@@ -1,0 +1,10 @@
+{
+  "address": "0x72Ed5f464AaA94BB0550c2e67b7B508485AB1E7b",
+  "allowlist": [
+    "0x2e04f776e11654a9ed2b020c3c50621afc562ff52452dae90dc33ba275d9ecd6",
+    "0x60e319ef35ee018d010842669808b26d938dd8752029881f59db25983ff8bbc2"
+  ],
+  "snapshot": [
+    "0x2e04f776e11654a9ed2b020c3c50621afc562ff52452dae90dc33ba275d9ecd6"
+  ]
+}

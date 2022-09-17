@@ -14,16 +14,15 @@ const ConnectModal: React.FC<Props> = ({ setShowModal }) => {
   const [txMsg, setTxMsg] = useState('');
 
   const handleConnectWallet = async (connectorToUse: Connectors) => {
-    setShowModal(false);
     const connector = connectors[connectorToUse];
 
     try {
-      if (connector.getChainId().valueOf() !== '0x1') {
-        if (window.ethereum) await switchChain('0x1');
-        else return alert('PLEASE SET YOUR WALLET TO THE ETHEREUM NETWORK');
+      if (connectorToUse === Connectors.Injected) {
+        if (connector.getChainId().valueOf() !== '0x1') {
+          await switchChain('0x1');
+        }
       }
       await activate(connector);
-      if (active) setTxMsg('SUCCESSFULLY CONNECTED');
     } catch (err) {
       console.error(err);
       setTxMsg('ERROR, PLEASE TRY AGAIN');
@@ -37,8 +36,14 @@ const ConnectModal: React.FC<Props> = ({ setShowModal }) => {
   useEffect(() => {
     setTimeout(() => {
       setTxMsg('');
-    }, 10000);
+    }, 5000);
   }, [txMsg]);
+
+  useEffect(() => {
+    if (active) {
+      setTxMsg('SUCCESSFULLY CONNECTED');
+    }
+  }, [active]);
 
   return (
     <>
@@ -49,7 +54,7 @@ const ConnectModal: React.FC<Props> = ({ setShowModal }) => {
           <St.XButton src="/icons/x-icon-lg.svg" onClick={handleCloseModal} />
         </St.MsgDiv>
 
-        {/* <St.SubtleText>[ SET WALLET TO ETHEREUM NETWORK ]</St.SubtleText> */}
+        <St.SubtleText>[ SET WALLET TO ETHEREUM NETWORK ]</St.SubtleText>
 
         <St.Button onClick={() => handleConnectWallet(Connectors.Injected)}>
           METAMASK
