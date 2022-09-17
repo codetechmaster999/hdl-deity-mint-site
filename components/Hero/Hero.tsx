@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
 
   const { maxSupply, mintPrice } = useMintDetails();
 
-  const [currentSupply, setCurrentSupply] = useState(1000);
+  const [currentSupply, setCurrentSupply] = useState(maxSupply);
 
   const currentContract = useContract();
 
@@ -38,16 +38,21 @@ const Hero: React.FC = () => {
       <St.SubtleDiv>
         <St.YellowText>
           {mintPrice}
-          <St.SubtleText>(ETH).</St.SubtleText>
+          <St.SubtleText> (ETH).</St.SubtleText>
         </St.YellowText>
         <St.YellowText>
-          {priceUsd > 0 ? (priceUsd * 0.09).toFixed(2) : 'Calculating...'}
-          <St.SubtleText>(USD).</St.SubtleText>
+          {priceUsd > 0
+            ? new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              }).format(priceUsd * mintPrice)
+            : 'Calculating...'}
+          <St.SubtleText> (USD).</St.SubtleText>
         </St.YellowText>
         <St.YellowText>
-          {currentSupply < 1000 ? currentSupply : maxSupply}{' '}
+          {currentSupply < maxSupply ? maxSupply - currentSupply : maxSupply}{' '}
           <St.SubtleText>
-            {currentSupply < 1000 ? 'NFTS REMAINING' : 'NFTS TOTAL'}.
+            {currentSupply < maxSupply ? 'NFTS REMAINING' : 'NFTS TOTAL'}.
           </St.SubtleText>
         </St.YellowText>
       </St.SubtleDiv>
