@@ -23,8 +23,6 @@ export const useMintDetails = () => {
     if (currentTime >= mintStart && currentTime <= publicStart) {
       setIsPreSale(true);
     }
-
-    console.log(isMintLive, isPreSale);
   }, [currentTime]);
 
   return {
