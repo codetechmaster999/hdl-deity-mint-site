@@ -94,13 +94,12 @@ const BuyModal: React.FC<Props> = ({
           </St.Button>
         ) : (
           <CrossmintPayButton
-            clientId="147a912e-4500-4d8a-a569-5c1d38ea45f7"
+            clientId="80ea9518-778f-4924-9924-be506144cc03"
             mintConfig={{
               type: 'erc-721',
               totalPrice: total,
               numberOfTokens: quantity,
             }}
-            environment="staging"
           />
         )}
       </St.BuyModalContainer>

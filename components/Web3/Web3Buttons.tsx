@@ -21,7 +21,8 @@ import * as St from '../Hero/Hero.styled';
 const Web3Buttons: React.FC = () => {
   useEagerConnect();
   const { active, account } = useWeb3React();
-  const { isPreSale, mintPrice, maxSupply, discountPrice } = useMintDetails();
+  const { isPreSale, mintPrice, maxSupply, discountPrice, isMintLive } =
+    useMintDetails();
   const { storefrontContract, tokenContract } = useContract();
 
   const [showConnectModal, setShowConnectModal] = useState(false);
@@ -51,6 +52,9 @@ const Web3Buttons: React.FC = () => {
   };
 
   const handleCryptoClick = async () => {
+    if (!isMintLive) {
+      return handleError('MINT IS NOT LIVE YET');
+    }
     if (!active) {
       setShowConnectModal(!showConnectModal);
     } else if (
@@ -84,9 +88,20 @@ const Web3Buttons: React.FC = () => {
   };
 
   const handleCardClick = async () => {
+    if (!isMintLive) {
+      return handleError('MINT IS NOT LIVE YET');
+    }
     if (isPreSale && !active) {
-      handleError('MUST CONNECT WALLET DURING PRESALE FOR ALLOWLIST');
-    } else if (
+      return handleError('MUST CONNECT WALLET DURING PRESALE FOR ALLOWLIST');
+    }
+    if (
+      isPreSale &&
+      active &&
+      allowlistInfo.allowlistStatus === AllowlistStatus.NotAllowlisted
+    ) {
+      return handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
+    }
+    if (
       isPreSale &&
       active &&
       allowlistInfo.allowlistStatus === AllowlistStatus.NotAllowlisted
@@ -213,7 +228,9 @@ const Web3Buttons: React.FC = () => {
   return (
     <St.ButtonContainer>
       <St.Button onClick={handleCryptoClick}>{cryptoButtonText}</St.Button>
-      <St.Button onClick={handleCardClick}>PAY WITH CARD</St.Button>
+      {isMintLive && !isPreSale && (
+        <St.Button onClick={handleCardClick}>PAY WITH CARD</St.Button>
+      )}
 
       {showConnectModal && <ConnectModal setShowModal={setShowConnectModal} />}
 

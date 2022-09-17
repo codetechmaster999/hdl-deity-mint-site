@@ -10,16 +10,17 @@ import {
   callDiscountMint,
 } from 'web3/web3Fetches';
 
-// const urls = { // mainnet urls
-// //  openSea: `https://opensea.io/assets/ethereum/`,
-//   etherscan: `https://etherscan.io/tx/`,
-// };
+// mainnet urls
+const urls = {
+  //  openSea: `https://opensea.io/assets/ethereum/`,
+  etherscan: `https://etherscan.io/tx/`,
+};
 
 //rinkeby urls
-const urls = {
-  // openSea: `https://testnets.opensea.io/assets/rinkeby/`,
-  etherscan: `https://rinkeby.etherscan.io/tx/`,
-};
+// const urls = {
+//   // openSea: `https://testnets.opensea.io/assets/rinkeby/`,
+//   etherscan: `https://rinkeby.etherscan.io/tx/`,
+// };
 
 export interface ISuccessInfo {
   message: string;
