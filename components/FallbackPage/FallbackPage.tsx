@@ -13,9 +13,7 @@ const FallbackPage: React.FC = () => {
         <St.HDLTitle>ĦYGIΣNIC DRΣ$$ LΣΛGUΣ CØRPØRΛTIØN</St.HDLTitle>
         {mintStart > now ? (
           <>
-            <St.Text>
-              The mint you are trying to access will be active in...
-            </St.Text>
+            <St.Text>The Pre-Genesis Deity Pre-Sale begins in...</St.Text>
             <St.MintCountdownDiv>
               <St.MintCountdown date={mintStart} />
             </St.MintCountdownDiv>
