@@ -9,10 +9,12 @@ import {
   discountMint,
   ISuccessInfo,
 } from './web3Helpers';
+import { checkIfUserHasClaimedDiscount } from 'web3/web3Fetches';
 import ConnectModal from 'components/Modals/ConnectModal';
 import BuyModal from 'components/Modals/BuyModal';
 import ErrorModal from 'components/Modals/ErrorModal';
 import SuccessModal from 'components/Modals/SuccessModal';
+import CardDiscountModal from 'components/Modals/CardDiscountModal';
 import { getAllowlistStatus, AllowlistStatus } from 'utils/getAllowlistStatus';
 import * as St from '../Hero/Hero.styled';
 
@@ -26,6 +28,7 @@ const Web3Buttons: React.FC = () => {
   const [showBuyModal, setShowBuyModal] = useState(false);
 
   const [payWithCard, setPayWithCard] = useState(false);
+  const [isDiscount, setIsDiscount] = useState(false);
   const [allowlistInfo, setAllowlistInfo] = useState({
     allowlistStatus: AllowlistStatus.NotAllowlisted,
     merkleProof: [''],
@@ -36,6 +39,8 @@ const Web3Buttons: React.FC = () => {
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successInfo, setSuccessInfo] = useState<ISuccessInfo>();
+
+  const [showCardDiscountModal, setShowCardDiscountModal] = useState(false);
 
   const [cryptoButtonText, setCryptoButtonText] = useState('CONNECT WALLET');
   const [buyButtonText, setBuyButtonText] = useState('MINT WITH CRYPTO');
@@ -54,9 +59,27 @@ const Web3Buttons: React.FC = () => {
     ) {
       handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
     } else {
-      setPayWithCard(false);
-      setBuyButtonText('MINT WITH CRYPTO');
-      setShowBuyModal(true);
+      if (allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted) {
+        const hasUserClaimedDiscount = await checkIfUserHasClaimedDiscount(
+          storefrontContract,
+          account as string,
+        );
+        if (hasUserClaimedDiscount) {
+          setPayWithCard(false);
+          setIsDiscount(false);
+          setBuyButtonText('MINT WITH CRYPTO');
+          setShowBuyModal(true);
+        } else {
+          setPayWithCard(false);
+          setIsDiscount(true);
+          setBuyButtonText('MINT WITH CRYPTO');
+          setShowBuyModal(true);
+        }
+      } else {
+        setPayWithCard(false);
+        setBuyButtonText('MINT WITH CRYPTO');
+        setShowBuyModal(true);
+      }
     }
   };
 
@@ -69,6 +92,22 @@ const Web3Buttons: React.FC = () => {
       allowlistInfo.allowlistStatus === AllowlistStatus.NotAllowlisted
     ) {
       handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
+    } else if (
+      allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted
+    ) {
+      const hasUserClaimedDiscount = await checkIfUserHasClaimedDiscount(
+        storefrontContract,
+        account as string,
+      );
+
+      if (hasUserClaimedDiscount) {
+        setPayWithCard(true);
+        setIsDiscount(false);
+        setBuyButtonText('MINT WITH CARD');
+        setShowBuyModal(true);
+      } else {
+        setShowCardDiscountModal(true);
+      }
     } else {
       setPayWithCard(true);
       setBuyButtonText('MINT WITH CARD');
@@ -81,7 +120,6 @@ const Web3Buttons: React.FC = () => {
 
     try {
       if (allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted) {
-        // TODO: Check if user has used discount
         discountMint(
           storefrontContract,
           tokenContract,
@@ -141,6 +179,7 @@ const Web3Buttons: React.FC = () => {
     setShowBuyModal(false);
     setShowErrorModal(false);
     setShowSuccessModal(false);
+    setShowCardDiscountModal(false);
   };
 
   useEffect(() => {
@@ -182,9 +221,7 @@ const Web3Buttons: React.FC = () => {
         <BuyModal
           setShowModal={setShowBuyModal}
           payWithCard={payWithCard}
-          isDiscount={
-            allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted
-          }
+          isDiscount={isDiscount}
           handleCryptoMint={handleCryptoMint}
           handleError={handleError}
           buyButtonText={buyButtonText}
@@ -199,6 +236,15 @@ const Web3Buttons: React.FC = () => {
         <SuccessModal
           setShowModal={setShowSuccessModal}
           successInfo={successInfo as ISuccessInfo}
+        />
+      )}
+
+      {showCardDiscountModal && (
+        <CardDiscountModal
+          setShowModal={setShowCardDiscountModal}
+          setIsDiscount={setIsDiscount}
+          setPayWithCard={setPayWithCard}
+          setShowBuyModal={setShowBuyModal}
         />
       )}
     </St.ButtonContainer>

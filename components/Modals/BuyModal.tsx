@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CrossmintPayButton } from '@crossmint/client-sdk-react-ui';
 import { useMintDetails } from 'hooks/useMintDetails';
 import * as St from './Modals.styled';
+import { toWei } from 'web3-utils';
 
 interface Props {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -87,15 +88,21 @@ const BuyModal: React.FC<Props> = ({
             </St.PlusMinusButton>
           </St.PlusMinusDiv>
         )}
-        <St.Button
-          onClick={
-            payWithCard
-              ? () => handleCardMint(quantity)
-              : () => handleCryptoMint(quantity)
-          }
-        >
-          {buyButtonText}
-        </St.Button>
+        {!payWithCard ? (
+          <St.Button onClick={() => handleCryptoMint(quantity)}>
+            {buyButtonText}
+          </St.Button>
+        ) : (
+          <CrossmintPayButton
+            clientId="147a912e-4500-4d8a-a569-5c1d38ea45f7"
+            mintConfig={{
+              type: 'erc-721',
+              totalPrice: total,
+              numberOfTokens: quantity,
+            }}
+            environment="staging"
+          />
+        )}
       </St.BuyModalContainer>
     </>
   );

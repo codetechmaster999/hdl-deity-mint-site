@@ -4,6 +4,7 @@ import {
   checkIfMintActive,
   checkIfPresaleActive,
   checkIfSupply,
+  checkIfUserHasClaimedDiscount,
   callPublicMint,
   callPresaleMint,
   callDiscountMint,
@@ -42,8 +43,14 @@ export const discountMint = async (
   if (!isPresaleActive) return handleError('MINT IS NOT ACTIVE');
 
   const isSupplyRemaining = await checkIfSupply(tokenContract, maxSupply);
-  console.log(isSupplyRemaining);
   if (!isSupplyRemaining) return handleError('MINT HAS SOLD OUT');
+
+  const hasUserClaimedDiscount = await checkIfUserHasClaimedDiscount(
+    storefrontContract,
+    account,
+  );
+  if (hasUserClaimedDiscount)
+    return handleError('YOU HAVE ALREADY CLAIMED YOUR DISCOUNT');
 
   setBuyButtonText('MINTING...');
   const txObj = await callDiscountMint(
