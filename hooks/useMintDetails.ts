@@ -7,7 +7,7 @@ export const useMintDetails = () => {
   const publicStart = mintStart + preSalePeriod;
   const mintEnd = Date.parse('2022-10-18T14:22:00-0400');
 
-  const mintPrice = 0.09;
+  const mintPrice = 0.06;
   const discountPrice = 0.06;
   const maxSupply = 1000;
   const maxMint = 10;
