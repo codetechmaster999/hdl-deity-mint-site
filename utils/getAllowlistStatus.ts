@@ -3,7 +3,7 @@ import axios from 'axios';
 export enum AllowlistStatus {
   NotAllowlisted,
   Allowlisted,
-  Discountlisted,
+  // Discountlisted,
 }
 
 export const getAllowlistStatus = async (account: string) => {
@@ -14,12 +14,12 @@ export const getAllowlistStatus = async (account: string) => {
     const merkleProof = JSON.parse(response.data);
 
     if (merkleProof) {
-      if (merkleProof.snapshot) {
-        return {
-          allowlistStatus: AllowlistStatus.Discountlisted,
-          merkleProof: merkleProof.snapshot,
-        };
-      }
+      // if (merkleProof.snapshot) {
+      //   return {
+      //     allowlistStatus: AllowlistStatus.Discountlisted,
+      //     merkleProof: merkleProof.snapshot,
+      //   };
+      // }
       return {
         allowlistStatus: AllowlistStatus.Allowlisted,
         merkleProof: merkleProof.allowlist,

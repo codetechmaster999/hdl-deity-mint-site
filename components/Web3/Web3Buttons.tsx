@@ -63,27 +63,9 @@ const Web3Buttons: React.FC = () => {
     ) {
       handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
     } else {
-      if (allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted) {
-        const hasUserClaimedDiscount = await checkIfUserHasClaimedDiscount(
-          storefrontContract,
-          account as string,
-        );
-        if (hasUserClaimedDiscount) {
-          setPayWithCard(false);
-          setIsDiscount(false);
-          setBuyButtonText('MINT WITH CRYPTO');
-          setShowBuyModal(true);
-        } else {
-          setPayWithCard(false);
-          setIsDiscount(true);
-          setBuyButtonText('MINT WITH CRYPTO');
-          setShowBuyModal(true);
-        }
-      } else {
-        setPayWithCard(false);
-        setBuyButtonText('MINT WITH CRYPTO');
-        setShowBuyModal(true);
-      }
+      setPayWithCard(false);
+      setBuyButtonText('MINT WITH CRYPTO');
+      setShowBuyModal(true);
     }
   };
 
@@ -101,65 +83,19 @@ const Web3Buttons: React.FC = () => {
     ) {
       return handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
     }
-    if (
-      isPreSale &&
-      active &&
-      allowlistInfo.allowlistStatus === AllowlistStatus.NotAllowlisted
-    ) {
-      handleError('MUST BE ALLOWLISTED TO MINT DURING PRESALE');
-    } else if (
-      allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted
-    ) {
-      const hasUserClaimedDiscount = await checkIfUserHasClaimedDiscount(
-        storefrontContract,
-        account as string,
-      );
 
-      if (hasUserClaimedDiscount) {
-        setPayWithCard(true);
-        setIsDiscount(false);
-        setBuyButtonText('MINT WITH CARD');
-        setShowBuyModal(true);
-      } else {
-        setShowCardDiscountModal(true);
-      }
-    } else {
-      setPayWithCard(true);
-      setBuyButtonText('MINT WITH CARD');
-      setShowBuyModal(true);
-    }
+    setPayWithCard(true);
+    setBuyButtonText('MINT WITH CARD');
+    setShowBuyModal(true);
   };
 
   const handleCryptoMint = async (numberOfTokens: number) => {
     const payableAmount = numberOfTokens * mintPrice;
 
-    const hasUserClaimedDiscount = await checkIfUserHasClaimedDiscount(
-      storefrontContract,
-      account as string,
-    );
-
     try {
       if (
-        allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted &&
-        !hasUserClaimedDiscount
-      ) {
-        discountMint(
-          storefrontContract,
-          tokenContract,
-          maxSupply,
-          account as string,
-          discountPrice,
-          allowlistInfo.merkleProof,
-          handleError,
-          handleSuccess,
-          setBuyButtonText,
-          setShowBuyModal,
-        );
-      } else if (
-        (isPreSale &&
-          allowlistInfo.allowlistStatus === AllowlistStatus.Allowlisted) ||
-        (allowlistInfo.allowlistStatus === AllowlistStatus.Discountlisted &&
-          hasUserClaimedDiscount)
+        isPreSale &&
+        allowlistInfo.allowlistStatus === AllowlistStatus.Allowlisted
       ) {
         presaleMint(
           storefrontContract,
